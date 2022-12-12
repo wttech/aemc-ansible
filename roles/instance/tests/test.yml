@@ -1,0 +1,4 @@
+---
+- hosts: localhost
+  roles:
+    - wttech.aem.instance

@@ -1,0 +1,21 @@
+- name: create dir for executable CLI
+  file:
+    path: "{{ aem_cli_executable | dirname }}"
+    state: directory
+
+# use 'stat' to avoid re-downloading CLI again due to 'get_url' bug: https://github.com/ansible/ansible/issues/64016
+- name: check executable CLI
+  stat:
+    path: "{{ aem_cli_executable }}"
+  register: r
+
+- name: download executable CLI
+  get_url:
+    url: "{{ aem_cli_download_url }}"
+    dest: "{{ aem_cli_executable }}"
+  when: not r.stat.exists
+
+- name: prepare executable CLI
+  file:
+    path: "{{ aem_cli_executable }}"
+    mode: 0744
