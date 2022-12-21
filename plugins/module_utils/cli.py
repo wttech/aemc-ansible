@@ -28,7 +28,7 @@ class AEMC(object):
 
     def __init__(self, module: AnsibleModule):
         self.module = module
-        self.config_path = os.path.join(self.module.tmpdir, CONFIG_FILENAME)
+        self.config_file = os.path.join(self.module.tmpdir, CONFIG_FILENAME)
 
     def handle_json(self, args, data=None):
         executable = self._get_executable()
@@ -54,12 +54,12 @@ class AEMC(object):
 
     def _write_config(self):
         try:
-            with open(self.config_path, 'w') as config_file:
+            with open(self.config_file, 'w') as config_file:
                 yaml.dump(self.module.params[CONFIG_PARAM], config_file, default_flow_style=False)
         except Exception as e:
             self.module.fail_json(msg="\n".join([
                 "PROBLEM:\n",
-                f"Unable to save config for AEM CLI command at path '{self.config_path}'",
+                f"Unable to save config for AEM CLI command at path '{self.config_file}'",
                 "ERROR:\n",
                 f"{e}",
             ]))
@@ -71,7 +71,7 @@ class AEMC(object):
                 args=args,
                 data=data,
                 environ_update=dict(
-                    AEM_CONFIG_PATH=os.path.dirname(self.config_path),
+                    AEM_CONFIG_FILE=self.config_file,
                     AEM_INPUT_FILE='STDIN',
                     AEM_INPUT_FORMAT='yml',
                     AEM_OUTPUT_FORMAT='json',

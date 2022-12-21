@@ -39,9 +39,9 @@ aem:
 
     # Managed locally (set up automatically)
     local:
+      unpack_dir: '/Users/krystian.panek/Projects/aemc/aem/home/instance'
       quickstart:
-        dist_path: '/Users/krystian.panek/Projects/gat/resource/remote/aem/instance/aem-sdk-quickstart-2022.7.8005.jar'
-        license_path: '/Users/krystian.panek/Projects/gat/resource/remote/aem/instance/license.properties'
-      unpack_path: '/Users/krystian.panek/Projects/aemc/out'
+        dist_file: '/Users/krystian.panek/Projects/aemc/aem/home/lib/cq-quickstart-6.5.0.jar'
+        license_file: '/Users/krystian.panek/Projects/aemc/aem/home/lib/license.properties'
 
 

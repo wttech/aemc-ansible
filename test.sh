@@ -30,7 +30,7 @@ echo ""
 
 (cd ../aemc && make build)
 
-AEM_CLI_EXECUTABLE="$(rp "../aemc/bin/aemc-cli")"
+AEM_CLI_EXECUTABLE="$(rp "../aemc/bin/aem")"
 export AEM_CLI_EXECUTABLE # TODO comment out to test auto-downloading of CLI via 'base' role
 
 echo ""

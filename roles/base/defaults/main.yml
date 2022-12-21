@@ -2,9 +2,7 @@
 aem_cli_version: v0.2.1
 aem_cli_executable: "/tmp/aemc-cli/{{ aem_cli_version }}/aemc-cli.bin"
 
-# TODO uncomment when made public
-#aem_cli_download_url: "https://github.com/wttech/aemc/releases/download/{{ aem_cli_version }}/aemc-cli_{{ aem_os }}_{{ aem_arch }}{{ aem_ext }}"
-aem_cli_download_url: https://drive.google.com/u/0/uc?id=1EFKd6aNm5IXhRO_mExpgt1qeHdblRTkR&export=download
+aem_cli_download_url: "https://github.com/wttech/aemc/releases/download/{{ aem_cli_version }}/aemc-cli_{{ aem_os }}_{{ aem_arch }}{{ aem_ext }}"
 
 aem_arch: "{{ ansible_architecture }}"
 aem_os: "{{ aem_os_map[ansible_os_family] | default('linux') }}"
