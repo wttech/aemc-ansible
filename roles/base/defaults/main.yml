@@ -1,18 +1,17 @@
 ---
-aem_cli_version: v0.2.1
-aem_cli_executable: "/tmp/aemc-cli/{{ aem_cli_version }}/aemc-cli.bin"
+aem_cli_version: v0.15.3
+aem_cli_executable: "/tmp/aemc-cli/lib/{{ aem_cli_version }}/aem"
+aem_cli_filename: "aemc-cli_{{ aem_os }}_{{ aem_arch }}.{{ aem_ext }}"
 
-aem_cli_download_url: "https://github.com/wttech/aemc/releases/download/{{ aem_cli_version }}/aemc-cli_{{ aem_os }}_{{ aem_arch }}{{ aem_ext }}"
+aem_cli_archive_url: "https://github.com/wttech/aemc/releases/download/{{ aem_cli_version }}/{{ aem_cli_filename }}"
+aem_cli_archive_file: "/tmp/aemc-cli/archive/{{ aem_cli_filename }}"
 
 aem_arch: "{{ ansible_architecture }}"
 aem_os: "{{ aem_os_map[ansible_os_family] | default('linux') }}"
-aem_ext: "{{ aem_ext_map[ansible_os_family] | default('') }}"
+aem_ext: "{{ aem_ext_map[ansible_os_family] | default('tar.gz') }}"
 
 aem_os_map:
-  Debian: linux
-  RedHat: linux
-  Amazon: linux
-  Fedora: linux
+  Darwin: darwin
   Windows: windows
 aem_ext_map:
   Windows: .exe

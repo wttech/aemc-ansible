@@ -222,3 +222,5 @@ $RECYCLE.BIN/
 aem.log
 ansible.log
 __pycache__
+
+**/aem/home

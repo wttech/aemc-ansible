@@ -107,7 +107,7 @@ Provides modules and roles built on top of [AEM Compose CLI](https://github.com/
     Mac:
     
     ```shell
-    brew install ansible
+    brew install ansible gnu-tar
     ```
 
 2. Setup collection to be visible by Ansible
