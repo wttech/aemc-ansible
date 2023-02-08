@@ -1,0 +1,11 @@
+---
+- hosts: localhost
+  tasks:
+
+    - name: turn off instances
+      wttech.aem.instance:
+        command: down
+
+    - name: destroy instances
+      wttech.aem.instance:
+        command: destroy

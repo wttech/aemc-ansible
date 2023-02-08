@@ -1,4 +1,4 @@
----
+# Configuration passed to AEM Compose CLI
 aem:
 
   # AEM instances to work with
@@ -113,6 +113,15 @@ aem:
         dist_file: 'aem/home/lib/{aem-sdk,cq-quickstart}-*.{zip,jar}'
         # AEM License properties file
         license_file: "aem/home/lib/license.properties"
+
+    # Status discovery (timezone, AEM version, etc)
+    status:
+      timeout: 500ms
+
+    # JCR Repository
+    repo:
+      property_change_ignored:
+        - "transportPassword" # because AEM encrypts it right after changing by replication agent setup command
 
     # Package Manager
     package:

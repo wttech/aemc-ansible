@@ -1,0 +1,61 @@
+---
+- hosts: localhost
+  roles:
+    - wttech.aem.instance
+  tasks:
+    # Package tests
+
+    - name: deploy APM package
+      wttech.aem.pkg:
+        command: deploy
+        file: /tmp/apm-all-5.5.1.zip
+
+    - name: read APM package
+      wttech.aem.pkg:
+        command: find
+        instance_id: local_author
+        file: /tmp/apm-all-5.5.1.zip
+
+    # Repository tests
+
+    - name: read some node
+      wttech.aem.repo_node:
+        command: read
+        instance_id: local_author
+        path: /content/cq:tags/experience-fragments
+      register: res
+
+    - name: print node created time
+      debug:
+        msg: "Node '/content/cq:tags/experience-fragments' was created at '{{ res.data.node.properties['jcr:created'] }}'"
+
+    - name: save some node
+      wttech.aem.repo_node:
+        command: save
+        instance_id: local_author
+        path: /content/foo
+        props:
+          foo: bar3
+
+    # OSGi tests
+
+    - name: read some bundle
+      wttech.aem.osgi_bundle:
+        command: read
+        instance_id: local_author
+        symbolic_name: com.day.cq.wcm.cq-wcm-core
+      register: res
+
+    - name: print read bundle ID
+      debug:
+        msg: "Bundle 'com.day.cq.wcm.cq-wcm-core' has ID '{{ res.data.bundle.details.id }}'"
+
+    - name: read all bundles
+      wttech.aem.osgi_bundle:
+        command: list
+        instance_id: local_author
+
+    - name: restart some bundle
+      wttech.aem.osgi_bundle:
+        command: restart
+        symbolic_name: org.apache.abdera.client

@@ -44,7 +44,7 @@ class AEMC(object):
 
         if not os.path.isfile(path):
             self.module.fail_json(msg="\n".join([
-                "PROBLEM:\n",
+                "> PROBLEM:\n",
                 f"Unable to find AEM CLI executable at path '{path}'!",
                 f"To fix the problem apply one of actions below:",
                 f"1) Set the Ansible variable '{EXECUTABLE_VAR}'",
@@ -58,9 +58,9 @@ class AEMC(object):
                 yaml.dump(self.module.params[CONFIG_PARAM], config_file, default_flow_style=False)
         except Exception as e:
             self.module.fail_json(msg="\n".join([
-                "PROBLEM:\n",
+                "> PROBLEM:\n",
                 f"Unable to save config for AEM CLI command at path '{self.config_file}'",
-                "ERROR:\n",
+                "> ERROR:\n",
                 f"{e}",
             ]))
 
@@ -80,11 +80,11 @@ class AEMC(object):
             json_str = out or err
         except Exception as e:
             self.module.fail_json(msg="\n".join([
-                "PROBLEM:\n",
+                "> PROBLEM:\n",
                 "Unable to run AEM CLI command:",
                 ' '.join(args),
                 "",
-                "ERROR:\n",
+                "> ERROR:\n",
                 f"{e}",
             ]))
         return json_str
@@ -101,22 +101,22 @@ class AEMC(object):
 
             if log:
                 msg = "\n".join([
-                    "COMMAND:\n",
+                    "> COMMAND:\n",
                     command,
                     "",
-                    "LOG:\n",
+                    "> LOG:\n",
                     log,
                     "",
-                    "RESULT:\n",
+                    "> RESULT:\n",
                     result,
                     "",
                 ])
             else:
                 msg = "\n".join([
-                    "COMMAND:\n",
+                    "> COMMAND:\n",
                     command,
                     "",
-                    "RESULT:\n",
+                    "> RESULT:\n",
                     result,
                     "",
                 ])
@@ -129,12 +129,12 @@ class AEMC(object):
             self.module.fail_json(msg="\n".join([
                 "Unable to parse JSON output of AEM CLI",
                 "",
-                "COMMAND:\n",
+                "> COMMAND:\n",
                 command,
                 "",
-                "OUTPUT:\n",
+                "> OUTPUT:\n",
                 output_json,
                 "",
-                "ERROR:\n",
+                "> ERROR:\n",
                 f"{e}",
             ]))

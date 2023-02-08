@@ -1,0 +1,4 @@
+# Supportive configuration for everything not managed by AEM Compose CLI
+
+aem_dispatcher_ip: 127.0.0.1
+aem_dispatcher_http_url: "http://{{ aem_dispatcher_ip }}"

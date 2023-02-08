@@ -2,7 +2,8 @@
 
 **AEM Compose** - Ansible Collection.
 
-Provides modules and roles built on top of [AEM Compose CLI](https://github.com/wttech/aemc).
+Provides modules and roles built on top of [AEM Compose CLI](https://github.com/wttech/aemc) to provision AEM instances to desired state.
+Configuration changes are applied idempotently in the Ansible spirit to reduce execution time making the tool effective in practice.
 
 ## Example usage
 
@@ -33,28 +34,21 @@ Provides modules and roles built on top of [AEM Compose CLI](https://github.com/
       transportPassword: "{{ aem.instance.config.local_publish.password }}"
       userId: "{{ aem.instance.config.local_publish.user }}"
 
-- name: download APM package
-  get_url:
-    url: https://github.com/wttech/APM/releases/download/apm-5.5.1/apm-all-5.5.1.zip
-    dest: /tmp/apm-all-5.5.1.zip
-
 - name: deploy APM package
   wttech.aem.pkg:
     command: deploy
-    instance_id: local_author 
-    file: /tmp/apm-all-5.5.1.zip
-
-- name: read APM package
-  wttech.aem.pkg:
-    command: find
-    instance_id: local_author
-    file: /tmp/apm-all-5.5.1.zip
+    url: https://github.com/wttech/APM/releases/download/apm-5.5.1/apm-all-5.5.1.zip
 
 - name: read some node
   wttech.aem.repo_node:
     command: read
     instance_id: local_author
     path: /content/cq:tags/experience-fragments
+  register: res
+
+- name: print node creation time
+  debug:
+    msg: "Node '/content/cq:tags/experience-fragments' was created at '{{ res.data.node.properties['jcr:created'] }}'"
 
 - name: save some node
   wttech.aem.repo_node:
@@ -78,25 +72,17 @@ Provides modules and roles built on top of [AEM Compose CLI](https://github.com/
 - name: enable CRX DE
   wttech.aem.osgi_config:
     command: save
-    instance_id: "{{ item }}"
     pid: org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet
     props:
       alias: /crx/server
-  with_items: [local_author, local_publish]
-
-- name: read all bundles
-  wttech.aem.osgi_bundle:
-    command: list
-    instance_id: local_author
-
-- name: turn off instances
-  wttech.aem.instance:
-    command: down
-
-- name: destroy instances
-  wttech.aem.instance:
-    command: destroy
 ```
+
+Consider reviewing playbooks used in tests for more example usages:
+
+- instance role 
+  - [extensive](roles/instance/tests/extensive.yml)
+  - [clean](roles/instance/tests/minimal.yml)
+  - [minimal](roles/instance/tests/minimal.yml)
 
 ## Development 
 
@@ -124,10 +110,15 @@ Provides modules and roles built on top of [AEM Compose CLI](https://github.com/
 
 ### Developer testing guide
 
-Simply run command:
+Simply run one of above commands:
 
 ```shell
 sh test.sh
+sh test.sh instance
+sh test.sh instance minimal
+sh test.sh instance minimal -vvv
+sh test.sh instance extensive
+sh test.sh instance extensive -vvv
 ```
 
 See results:
