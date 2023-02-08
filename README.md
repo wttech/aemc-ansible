@@ -111,7 +111,6 @@ Configuration changes are applied idempotently in the Ansible spirit to reduce e
     
     - instance role 
       - [extensive](roles/instance/tests/extensive.yml)
-      - [clean](roles/instance/tests/clean.yml)
       - [minimal](roles/instance/tests/minimal.yml)
 
 ## Development 
