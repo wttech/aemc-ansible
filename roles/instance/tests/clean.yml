@@ -1,7 +1,8 @@
 ---
 - hosts: localhost
+  roles:
+    - wttech.aem.instance
   tasks:
-
     - name: turn off instances
       wttech.aem.instance:
         command: down
