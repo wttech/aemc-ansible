@@ -21,13 +21,13 @@ echo "Releasing $VERSION"
 
 echo "Bumping version in files"
 
-ROLE_BASE_DEFAULTS_FILE="roles/base/defaults/main.yml"
+GALAXY_FILE="galaxy.yml"
 
 # <https://stackoverflow.com/a/57766728>
 if [ "$(uname)" = "Darwin" ]; then
-  sed -i '' 's/aem_cli_version: "[^\"]*"/aem_cli_version: "'"$VERSION"'"/g' "$ROLE_BASE_DEFAULTS_FILE"
+  sed -i '' 's/version: "[^\"]*"/version: "'"$VERSION"'"/g' "$GALAXY_FILE"
 else
-    sed -i 's/aem_cli_version: "[^\"]*"/aem_cli_version: "'"$VERSION"'"/g' "$ROLE_BASE_DEFAULTS_FILE"
+    sed -i 's/version: "[^\"]*"/version: "'"$VERSION"'"/g' "$GALAXY_FILE"
 fi
 
 echo "Pushing version bump"
