@@ -39,6 +39,9 @@ Configuration changes are applied idempotently in the Ansible spirit to reduce e
 
 2. Playbook:
 
+   For better flexibility, it is recommended to create your own instance role by copying the default instance role and then adapting it for a project-specific use case.
+   The tasks below are just showcasing meaningful features of AEM Compose Ansible modules.
+
     ```yaml 
     - name: create instances
       wttech.aem.instance:
