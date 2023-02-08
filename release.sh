@@ -1,15 +1,12 @@
 #!/usr/bin/env sh
 
 VERSION=$1
-VERSION_TAG="v$VERSION"
-
-VERSION_CURRENT_TAG=$(git describe --tags --abbrev=0)
-VERSION_CURRENT_TAG="${VERSION_CURRENT_TAG:1}"
+VERSION_CURRENT=$(git describe --tags --abbrev=0)
 
 if [ -z "$VERSION" ]
 then
       echo "Release version is not specified!"
-      echo "Last released: ${VERSION_CURRENT_TAG}"
+      echo "Last released: ${VERSION_CURRENT}"
       exit 1
 fi
 
@@ -20,7 +17,7 @@ if [ "$GIT_STAT" != '' ]; then
   exit 1
 fi
 
-echo "Releasing $VERSION_TAG"
+echo "Releasing $VERSION"
 
 echo "Bumping version in files"
 
@@ -34,9 +31,9 @@ else
 fi
 
 echo "Pushing version bump"
-git commit -a -m "Release $VERSION_TAG"
+git commit -a -m "Release $VERSION"
 git push
 
-echo "Pushing release tag '$VERSION_TAG'"
-git tag "$VERSION_TAG"
-git push origin "$VERSION_TAG"
+echo "Pushing release tag '$VERSION'"
+git tag "$VERSION"
+git push origin "$VERSION"
