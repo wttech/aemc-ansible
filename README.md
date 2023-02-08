@@ -10,7 +10,8 @@ Configuration changes are applied idempotently in the Ansible spirit to reduce e
 1. Vars 
 
    All configuration options available for AEM Compose are also supported in Ansible.
-   It is only needed to nest config values under `aem` Ansible variable defined anywhere e.g in playbook or custom role (according to own [preferences](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_variables.html#where-to-set-variables)).
+   It is only needed to nest config values under `aem` Ansible variable defined anywhere e.g in the playbook or custom role (according to own [preferences](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_variables.html#where-to-set-variables)).
+   This special variable is passed to all AEM Compose modules automatically for the sake of simplicity.
 
    ```yaml
    aem: 
