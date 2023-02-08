@@ -14,4 +14,4 @@ aem_os_map:
   Darwin: darwin
   Windows: windows
 aem_ext_map:
-  Windows: .exe
+  Windows: exe
