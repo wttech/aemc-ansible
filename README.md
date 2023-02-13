@@ -7,7 +7,7 @@
 **AEM Compose** - Ansible Collection.
 
 Provides modules and roles built on top of [AEM Compose CLI](https://github.com/wttech/aemc) to provision [AEM](https://business.adobe.com/products/experience-manager/adobe-experience-manager.html) instances to desired state.
-Configuration changes are applied idempotently in the Ansible spirit to reduce execution time making the tool effective in practice.
+Configuration changes are applied idempotently in the Ansible spirit to reduce execution time making the tool effective in practice. Published in [Ansible Galaxy](https://galaxy.ansible.com/wttech/aem).
 
 ## Example configuration
 
