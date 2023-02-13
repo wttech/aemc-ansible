@@ -16,6 +16,12 @@ if [ -z ${AEM_CLI_EXECUTABLE+x} ]; then
   (cd ../aemc && make install)
 fi
 
+echo ""
+echo "===== Installing AEM Compose Ansible Collection ====="
+echo ""
+
+sh install.sh
+
 # ===== Execution =====
 
 echo ""

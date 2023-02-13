@@ -6,6 +6,11 @@
   tasks:
     # Package tests
 
+    - name: download CLI archive
+      get_url: # replace with s3|azure blob download, etc
+        url: https://github.com/wttech/APM/releases/download/apm-5.5.1/apm-all-5.5.1.zip
+        dest: /tmp/apm-all-5.5.1.zip
+
     - name: Deploy APM package
       wttech.aem.pkg:
         command: deploy
