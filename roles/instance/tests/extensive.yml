@@ -1,16 +1,17 @@
 ---
-- hosts: localhost
+- name: Text extensively AEM modules
+  hosts: localhost
   roles:
     - wttech.aem.instance
   tasks:
     # Package tests
 
-    - name: deploy APM package
+    - name: Deploy APM package
       wttech.aem.pkg:
         command: deploy
         file: /tmp/apm-all-5.5.1.zip
 
-    - name: read APM package
+    - name: Read APM package
       wttech.aem.pkg:
         command: find
         instance_id: local_author
@@ -18,18 +19,18 @@
 
     # Repository tests
 
-    - name: read some node
+    - name: Read some node
       wttech.aem.repo_node:
         command: read
         instance_id: local_author
         path: /content/cq:tags/experience-fragments
       register: res
 
-    - name: print node created time
-      debug:
+    - name: Print node created time
+      ansible.builtin.debug:
         msg: "Node '/content/cq:tags/experience-fragments' was created at '{{ res.data.node.properties['jcr:created'] }}'"
 
-    - name: save some node
+    - name: Save some node
       wttech.aem.repo_node:
         command: save
         instance_id: local_author
@@ -39,23 +40,23 @@
 
     # OSGi tests
 
-    - name: read some bundle
+    - name: Read some bundle
       wttech.aem.osgi_bundle:
         command: read
         instance_id: local_author
         symbolic_name: com.day.cq.wcm.cq-wcm-core
       register: res
 
-    - name: print read bundle ID
-      debug:
+    - name: Print read bundle ID
+      ansible.builtin.debug:
         msg: "Bundle 'com.day.cq.wcm.cq-wcm-core' has ID '{{ res.data.bundle.details.id }}'"
 
-    - name: read all bundles
+    - name: Read all bundles
       wttech.aem.osgi_bundle:
         command: list
         instance_id: local_author
 
-    - name: restart some bundle
+    - name: Restart some bundle
       wttech.aem.osgi_bundle:
         command: restart
         symbolic_name: org.apache.abdera.client

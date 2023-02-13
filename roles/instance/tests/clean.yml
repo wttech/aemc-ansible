@@ -1,13 +1,14 @@
 ---
-- hosts: localhost
+- name: Clean resources affected by AEM module tests
+  hosts: localhost
   roles:
     - role: wttech.aem.instance
       when: false
   tasks:
-    - name: turn off instances
+    - name: Turn off instances
       wttech.aem.instance:
         command: down
 
-    - name: destroy instances
+    - name: Destroy instances
       wttech.aem.instance:
         command: destroy

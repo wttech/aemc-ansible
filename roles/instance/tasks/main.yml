@@ -1,25 +1,25 @@
 ---
 
-#- name: Print effective config (debugging)
-#  wttech.aem.config:
+# - name: Print effective config (debugging)
+#   wttech.aem.config:
 #    command: print
 
-- name: create instance(s)
+- name: Create instance(s)
   wttech.aem.instance:
     command: create
 
-- name: turn on instance(s)
+- name: Turn on instance(s)
   wttech.aem.instance:
     command: up
 
-- name: enable CRX DE
+- name: Enable CRX DE
   wttech.aem.osgi_config:
     command: save
     pid: org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet
     props:
       alias: /crx/server
 
-- name: configure replication agent for publishing content
+- name: Configure replication agent for publishing content
   wttech.aem.repl_agent:
     command: setup
     instance_id: local_author
@@ -32,7 +32,7 @@
       transportPassword: "{{ aem.instance.config.local_publish.password }}"
       userId: "{{ aem.instance.config.local_publish.user }}"
 
-- name: configure replication agent for flushing dispatcher cache
+- name: Configure replication agent for flushing dispatcher cache
   wttech.aem.repl_agent:
     command: setup
     instance_id: local_publish

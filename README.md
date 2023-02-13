@@ -122,7 +122,8 @@ Configuration changes are applied idempotently in the Ansible spirit to reduce e
     Mac:
     
     ```shell
-    brew install ansible gnu-tar
+    brew install ansible ansible-lint gnu-tar
+    pip install antsibull-changelog
     ```
 
 2. Setup collection to be visible by Ansible

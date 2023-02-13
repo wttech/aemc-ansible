@@ -1,4 +1,5 @@
 ---
-- hosts: localhost
+- name: Test minimally AEM modules
+  hosts: localhost
   roles:
     - wttech.aem.instance

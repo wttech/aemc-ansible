@@ -1,34 +1,33 @@
-- name: check executable CLI
-  stat:
+- name: Check executable CLI
+  ansible.builtin.stat:
     path: "{{ aem_cli_executable }}"
   register: r
 
-- name: prepare CLI
+- name: Prepare CLI
+  when: not r.stat.exists
   block:
-    - name: create dir for CLI archive
-      file:
+    - name: Create dir for CLI archive
+      ansible.builtin.file:
         path: "{{ aem_cli_archive_file | dirname }}"
         state: directory
 
-    - name: download CLI archive
-      get_url:
+    - name: Download CLI archive
+      ansible.builtin.get_url:
         url: "{{ aem_cli_archive_url }}"
         dest: "{{ aem_cli_archive_file }}"
 
-    - name: create dir for CLI archive contents
-      file:
+    - name: Create dir for CLI archive contents
+      ansible.builtin.file:
         path: "{{ aem_cli_executable | dirname }}"
         state: directory
 
-    - name: unpack CLI archive
-      unarchive:
+    - name: Unpack CLI archive
+      ansible.builtin.unarchive:
         remote_src: true
         src: "{{ aem_cli_archive_file }}"
         dest: "{{ aem_cli_executable | dirname }}"
 
-    - name: make CLI executable
-      file:
+    - name: Make CLI executable
+      ansible.builtin.file:
         path: "{{ aem_cli_executable }}"
         mode: 0744
-
-  when: not r.stat.exists

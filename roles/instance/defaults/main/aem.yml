@@ -13,7 +13,7 @@ aem:
         http_url: http://127.0.0.1:4502
         user: admin
         password: admin
-        run_modes: [ local ]
+        run_modes: [local]
         jvm_opts:
           - '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:14502'
           - '-Djava.io.tmpdir=[[ .Path ]]/aem/home/tmp'
@@ -30,7 +30,7 @@ aem:
         http_url: http://127.0.0.1:4503
         user: admin
         password: admin
-        run_modes: [ local ]
+        run_modes: [local]
         jvm_opts:
           - '-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:14503'
           - '-Djava.io.tmpdir=[[ .Path ]]/aem/home/tmp'
@@ -126,7 +126,7 @@ aem:
     # Package Manager
     package:
       # Force re-uploading/installing of snapshot AEM packages (just built / unreleased)
-      snapshot_patterns: [ "**/*-SNAPSHOT.zip" ]
+      snapshot_patterns: ["**/*-SNAPSHOT.zip"]
       # Use checksums to avoid re-deployments when snapshot AEM packages are unchanged
       snapshot_deploy_skipping: true
 
