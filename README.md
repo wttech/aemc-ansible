@@ -1,4 +1,4 @@
-![Logo](docs/logo-with-text.png)
+![Logo](https://github.com/wttech/aemc-ansible/raw/main/docs/logo-with-text.png)
 
 **AEM Compose** - Ansible Collection.
 
@@ -123,7 +123,6 @@ Configuration changes are applied idempotently in the Ansible spirit to reduce e
     
     ```shell
     brew install ansible ansible-lint gnu-tar
-    pip install antsibull-changelog
     ```
 
 2. Setup collection to be visible by Ansible
@@ -136,7 +135,7 @@ Configuration changes are applied idempotently in the Ansible spirit to reduce e
 
    Intellij: Be sure to add Python SDK including global libraries as on screenshot below
    
-   ![IntelliJ Python SDK](docs/intellij-python-sdk.png)
+   ![IntelliJ Python SDK](https://github.com/wttech/aemc-ansible/raw/main/docs/intellij-python-sdk.png)
 
 ### Developer testing guide
 
@@ -153,4 +152,4 @@ sh test.sh instance extensive -vvv
 
 See results:
 
-![Ansible Results](docs/ansible-result.png)
+![Ansible Results](https://github.com/wttech/aemc-ansible/raw/main/docs/ansible-result.png)
