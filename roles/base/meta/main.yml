@@ -1,10 +1,9 @@
-dependencies:
-  - role: base
+dependencies: []
 
 galaxy_info:
-  role_name: instance
+  role_name: base
   author: wttech
-  description: Sets up AEM instance(s) using AEM Compose tool
+  description: Downloads and unpacks AEM Compose tool
   company: Wunderman Thompson Technologu
   issue_tracker_url: http://github.com/aemc-ansible/issues
   license: Apache-2.0
