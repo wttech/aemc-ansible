@@ -118,3 +118,16 @@ Configuration changes are applied idempotently in the Ansible spirit to reduce e
       - [extensive](roles/instance/tests/extensive.yml)
       - [minimal](roles/instance/tests/minimal.yml)
 
+
+# Contributing
+
+Issues reported or pull requests created will be very appreciated.
+
+1. Fork plugin source code using a dedicated GitHub button.
+2. See [development guide](DEVELOPMENT.md)
+3. Do code changes on a feature branch created from *main* branch.
+4. Create a pull request with a base of *main* branch.
+
+# License
+
+**AEM Compose** is licensed under the [Apache License, Version 2.0 (the "License")](https://www.apache.org/licenses/LICENSE-2.0.txt)
