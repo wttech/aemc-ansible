@@ -1,8 +1,8 @@
-[![AEM Compose Logo](https://github.com/wttech/aemc-ansible/raw/main/docs/logo-with-text.png)](https://www.wundermanthompson.com/service/technology)
+![AEM Compose Logo](https://github.com/wttech/aemc-ansible/raw/main/docs/logo-with-text.png)
 [![WTT Logo](https://github.com/wttech/aemc-ansible/raw/main/docs/wtt-logo.png)](https://www.wundermanthompson.com/service/technology)
 
 [![Apache License, Version 2.0, January 2004](https://github.com/wttech/aemc-ansible/raw/main/docs/apache-license-badge.svg)](http://www.apache.org/licenses/)
-
+[![Ansible Galaxy](https://img.shields.io/ansible/collection/2218?label=Ansible%20Galaxy)](https://galaxy.ansible.com/wttech/aem)
 
 **AEM Compose** - Ansible Collection.
 

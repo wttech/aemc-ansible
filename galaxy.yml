@@ -42,7 +42,7 @@ tags: ['aem', 'sling', 'jcr', 'oak', 'osgi', 'cq', 'application']
 dependencies: {}
 
 # The URL of the originating SCM repository
-repository: hhttps://github.com/wttech/aemc-ansible
+repository: https://github.com/wttech/aemc-ansible
 
 # The URL to any online docs
 documentation: https://github.com/wttech/aemc-ansible/README.MD
