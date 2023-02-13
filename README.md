@@ -1,6 +1,9 @@
 [![WTT logo](https://github.com/wttech/aemc-ansible/raw/main/docs/wtt-logo.png)](https://www.wundermanthompson.com/service/technology)
+
 [![Apache License, Version 2.0, January 2004](https://github.com/wttech/aemc-ansible/raw/main/docs/apache-license-badge.svg)](http://www.apache.org/licenses/)
+
 [![AEM Compose](https://github.com/wttech/aemc-ansible/raw/main/docs/logo-with-text.png)](https://www.wundermanthompson.com/service/technology)
+
 
 **AEM Compose** - Ansible Collection.
 
