@@ -1,0 +1,3 @@
+aws_region: "{{ lookup('env', 'AWS_REGION', errors='ignore') }}"
+aws_access_key_id: "{{ lookup('env', 'AWS_ACCESS_KEY_ID', errors='ignore') }}"
+aws_secret_access_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY', errors='ignore') }}"

@@ -1,0 +1,68 @@
+- name: Ensure library dir
+  file:
+    path: "{{ aem_lib_dir }}"
+    state: directory
+
+- name: Find library files on S3
+  aws_s3:
+    mode: list
+    aws_access_key_id: "{{ aws_access_key_id }}"
+    aws_secret_access_key: "{{ aws_secret_access_key }}"
+    bucket: "{{ aem_lib_s3_bucket }}"
+    prefix: "{{ aem_lib_s3_folder }}/"
+    marker: "{{ aem_lib_s3_folder  }}/"
+  register: aem_lib_s3_items
+
+- name: Download library files from S3
+  aws_s3:
+    mode: get
+    aws_access_key_id: "{{ aws_access_key_id }}"
+    aws_secret_access_key: "{{ aws_secret_access_key }}"
+    bucket: "{{ aem_lib_s3_bucket }}"
+    object: "{{ item }}"
+    dest: "{{ aem_lib_dir }}/{{ item|basename }}"
+    # overwrite: never
+  with_items: "{{ aem_lib_s3_items.s3_keys }}"
+
+- name: Create instance(s)
+  wttech.aem.instance:
+    command: create
+
+- name: Turn on instance(s)
+  wttech.aem.instance:
+    command: up
+
+- name: Enable CRX DE
+  wttech.aem.osgi_config:
+    command: save
+    pid: org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet
+    props:
+      alias: /crx/server
+
+- name: Configure replication agent for publishing content
+  wttech.aem.repl_agent:
+    command: setup
+    instance_id: local_author
+    location: author
+    name: publish
+    props:
+      enabled: true
+      transportUri: "{{ aem.instance.config.local_publish.http_url }}/bin/receive?sling:authRequestLogin=1"
+      transportUser: "{{ aem.instance.config.local_publish.user }}"
+      transportPassword: "{{ aem.instance.config.local_publish.password }}"
+      userId: "{{ aem.instance.config.local_publish.user }}"
+
+- name: Configure replication agent for flushing dispatcher cache
+  wttech.aem.repl_agent:
+    command: setup
+    instance_id: local_publish
+    location: publish
+    name: flush
+    props:
+      enabled: true
+      transportUri: "{{ aem_dispatcher_http_url }}/dispatcher/invalidate.cache"
+      protocolHTTPHeaders:
+        - "CQ-Action: {action}"
+        - "CQ-Handle: {path}"
+        - "CQ-Path: {path}"
+        - "Host: publish"

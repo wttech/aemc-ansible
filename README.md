@@ -5,10 +5,15 @@
 [![Ansible Galaxy](https://img.shields.io/ansible/collection/2218?label=Ansible%20Galaxy)](https://galaxy.ansible.com/wttech/aem)
 [![Apache License, Version 2.0, January 2004](https://github.com/wttech/aemc-ansible/raw/main/docs/apache-license-badge.svg)](http://www.apache.org/licenses/)
 
-**AEM Compose** - Ansible Collection.
+# AEM Compose - Ansible Collection
 
 Provides modules and roles built on top of [AEM Compose CLI](https://github.com/wttech/aemc) to provision [AEM](https://business.adobe.com/products/experience-manager/adobe-experience-manager.html) instances to desired state.
 Configuration changes are applied idempotently in the Ansible spirit to reduce execution time making the tool effective in practice. Published in [Ansible Galaxy](https://galaxy.ansible.com/wttech/aem).
+
+## Example integrations
+
+1. [Packer](examples/packer) - good starting point for baking AWS EC2 image using Ansible and AEM Compose Ansible modules
+2. ... Have an idea? Want to help? Raise an [issue](https://github.com/wttech/aemc-ansible/issues/new) :)
 
 ## Example configuration
 

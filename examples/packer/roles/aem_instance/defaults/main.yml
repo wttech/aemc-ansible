@@ -47,8 +47,8 @@ aem:
     # Filters for defined
     filter:
       id: ""
-      author: false
-      publish: false
+      author: "{{ aem_instance_author_enabled }}"
+      publish: "{{ aem_instance_publish_enabled }}"
 
     # Tuning performance & reliability
     # 'auto'     - for more than 1 local instances - 'serial', otherwise 'parallel'
@@ -158,4 +158,4 @@ aem:
 
   base:
     # Location of temporary files (downloaded AEM packages, etc)
-    tmp_dir: "{{ aem_tmp_dir }}"
+    tmp_dir: "{{ aem_home_dir }}/tmp"

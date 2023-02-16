@@ -16,9 +16,9 @@ class AemActionBase(ActionBase):
 
         module_args[CONFIG_PARAM] = {}
         if CONFIG_VAR in task_vars:
-            module_args[CONFIG_PARAM].update(task_vars[CONFIG_VAR])
+            module_args[CONFIG_PARAM].update(self._templar.template(task_vars[CONFIG_VAR]))
         if CONFIG_VAR in tpl_vars:
-            module_args[CONFIG_PARAM].update(tpl_vars[CONFIG_VAR])
+            module_args[CONFIG_PARAM].update(self._templar.template(tpl_vars[CONFIG_VAR]))
 
         if EXECUTABLE_VAR in task_vars:
             module_args[EXECUTABLE_PARAM] = self._templar.template(task_vars[EXECUTABLE_VAR])
