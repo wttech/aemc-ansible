@@ -32,7 +32,7 @@ echo "Playbook: ${PLAYBOOK}"
 echo ""
 
 run_ansible() {
-  cd "roles/${ROLE}/tests" && ansible-playbook -i "inventory" "${PLAYBOOK}.yml" --connection=local "${FLAGS}"
+  cd "roles/${ROLE}/tests" && ansible-playbook -i "inventory" "${PLAYBOOK}.yml" --connection=local -e aem_home_dir='' "${FLAGS}"
 }
 ( run_ansible )
 

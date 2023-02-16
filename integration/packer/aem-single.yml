@@ -1,0 +1,6 @@
+---
+- name: Setup 'aem-single' environment (author, publish & dispatcher)
+  hosts: aem-single
+  become: yes
+  roles:
+    - wttech.aem.instance
