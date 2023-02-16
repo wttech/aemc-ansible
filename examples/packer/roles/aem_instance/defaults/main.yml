@@ -151,6 +151,11 @@ aem:
     # Validate if following Java version constraints are met
     version_constraints: ">= 11, < 12"
 
+  output:
+    log:
+      # File path of logs written especially when output format is different than 'text'
+      file: "{{ aem_home_dir }}/var/log/aem.log"
+
   base:
     # Location of temporary files (downloaded AEM packages, etc)
     tmp_dir: "{{ aem_home_dir }}/tmp"
