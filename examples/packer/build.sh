@@ -9,4 +9,4 @@ if [ -z ${AWS_SECRET_ACCESS_KEY+x} ]; then
   exit 1
 fi
 
-packer build .
+packer build "$@" .
