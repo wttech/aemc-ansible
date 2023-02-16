@@ -12,6 +12,7 @@
 
     ```shell
     brew install ansible ansible-lint gnu-tar
+    pip3 install https://github.com/mitogen-hq/mitogen/archive/refs/tags/v0.3.3.tar.gz
     ```
 
 2. Setup collection to be visible by Ansible

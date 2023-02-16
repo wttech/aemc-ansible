@@ -4,5 +4,11 @@ aem_home_dir: "/opt/aem"
 aem_tmp_dir: "{{ aem_home_dir }}/tmp"
 aem_lib_dir: "{{ aem_home_dir }}/lib"
 
+aem_lib_s3_bucket: "aemc"
+aem_lib_s3_folder: "project/cloud/lib"
+
+aem_instance_author_enabled: true
+aem_instance_publish_enabled: true
+
 aem_dispatcher_ip: 127.0.0.1
 aem_dispatcher_http_url: "http://{{ aem_dispatcher_ip }}"

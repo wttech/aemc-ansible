@@ -3,7 +3,7 @@ locals {
 
   workspace = "aemc"
   env_type = "aem-single"
-  host = "aem-single"
+  host = "aem_single"
 
   ssh_user = "ec2-user"
 
@@ -48,15 +48,15 @@ build {
   sources = ["source.amazon-ebs.ami"]
 
   provisioner "file" {
-    source = "requirements.txt"
+    source = "managed-requirements.txt"
     destination = "/tmp/requirements.txt"
   }
   provisioner "shell" {
-    script = "./ansible-prepare.sh"
+    script = "./managed-init.sh"
   }
   provisioner "ansible" {
-    command = "./ansible-run.sh"
-    playbook_file = "aem-single.yml"
+    command = "./controller-run.sh"
+    playbook_file = "aem_single.yml"
     extra_arguments = ["--verbose"]
     host_alias = "${local.host}"
     user = "${local.ssh_user}"
