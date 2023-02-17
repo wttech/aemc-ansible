@@ -12,6 +12,8 @@ Set up AEM instances on [AWS EC2](https://aws.amazon.com/ec2/) machine using [AE
 * launch & terminate automatically machine for tests using `skip_create_ami = true` [option](https://developer.hashicorp.com/packer/plugins/builders/amazon/ebs#skip_create_ami).
 * allows to bake machine image when `skip_create_ami = false`
 
+## Example result
+
 ![packer-result.png](docs/packer-result.png)
 
 ## Prerequisites
