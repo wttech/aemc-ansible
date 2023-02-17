@@ -9,4 +9,9 @@ if [ -z ${AWS_SECRET_ACCESS_KEY+x} ]; then
   exit 1
 fi
 
-packer build "$@" .
+docker run \
+  -v "$(pwd):/controller" \
+  -e AWS_ACCESS_KEY_ID \
+  -e AWS_SECRET_ACCESS_KEY \
+  wttech/aemc/controller-aws \
+  packer build "$@" .

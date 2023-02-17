@@ -6,8 +6,8 @@
 - name: Find library files on S3
   aws_s3:
     mode: list
-    aws_access_key_id: "{{ aws_access_key_id }}"
-    aws_secret_access_key: "{{ aws_secret_access_key }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
     bucket: "{{ aem_lib_s3_bucket }}"
     prefix: "{{ aem_lib_s3_folder }}/"
     marker: "{{ aem_lib_s3_folder  }}/"
@@ -16,8 +16,8 @@
 - name: Download library files from S3
   aws_s3:
     mode: get
-    aws_access_key_id: "{{ aws_access_key_id }}"
-    aws_secret_access_key: "{{ aws_secret_access_key }}"
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
     bucket: "{{ aem_lib_s3_bucket }}"
     object: "{{ item }}"
     dest: "{{ aem_lib_dir }}/{{ item|basename }}"

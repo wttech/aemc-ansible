@@ -15,27 +15,13 @@ Set up AEM instances on [AWS EC2](https://aws.amazon.com/ec2/) machine using [AE
 
 ## Prerequisites
 
-1. Install OS-specific software
-
-   a) Mac
-    
-   ```shell
-   brew install ansible gnu-tar
-   ```
-   
-   b) Other/Unix
+1. Run script building an Ansible controller with all dependent software installed
 
    ```shell
-   [yum/dnf/apt-get] install ansible
+   (cd ../controller && sh build.sh)
    ```
 
-2. Run script
-
-   ```shell
-   sh controller-init.sh
-   ```
-
-3. Set up AWS environment variables
+2. Set up AWS environment variables
 
    ```shell
    export AWS_ACCESS_KEY_ID=xxx
@@ -60,10 +46,10 @@ sh build.sh -debug
 
 ## Mitogen
 
-This project is prepared for [Ansible Mitogen](https://mitogen.networkgenomics.com/ansible_detailed.html#demo) usage which could seriously improve Ansible execution time.
+This project is using [Ansible Mitogen](https://mitogen.networkgenomics.com/ansible_detailed.html#demo) which seriously improves Ansible execution time.
 However, Mitogen comes with a little trade-off. It's not being updated regularly and sticks to a particular, not always up-to-date Ansible version. In other words, Mitogen disallows to use of the most recent Ansible version so using it should be considered with care. But still, in most cases using it could be very valuable.
 
-### Enabling Mitogen
+### Disabling Mitogen
 
-1. Uncomment line with `strategy_plugins` in [ansible.cfg](ansible.cfg)
-2. Uncomment line `strategy: mitogen_linear` in playbook [aem_single.yml](aem_single.yml)
+1. Comment out line with `strategy_plugins` in [ansible.cfg](ansible.cfg)
+2. Comment out line `strategy: mitogen_linear` in playbook [aem_single.yml](aem_single.yml)
