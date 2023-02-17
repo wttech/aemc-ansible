@@ -15,7 +15,7 @@ Set up AEM instances on [AWS EC2](https://aws.amazon.com/ec2/) machine using [AE
 
 ## Prerequisites
 
-1. Run script building an Ansible controller with all dependent software installed
+1. Build [controller](../controller/README.md) using command
 
    ```shell
    (cd ../controller && sh build.sh)
