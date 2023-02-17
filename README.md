@@ -13,7 +13,7 @@ Configuration changes are applied idempotently in the Ansible spirit to reduce e
 ## Example integrations
 
 1. [Packer](examples/packer) - good starting point for baking AWS EC2 image using Ansible and AEM Compose Ansible modules
-2. ... Have an idea? Want to help? Raise an [issue](https://github.com/wttech/aemc-ansible/issues/new) :)
+2. Have an idea for the next one? Want to help? At least raise an [issue](https://github.com/wttech/aemc-ansible/issues/new) :)
 
 ## Example configuration
 
