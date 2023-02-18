@@ -31,6 +31,8 @@ Set up AEM instances on [AWS EC2](https://aws.amazon.com/ec2/) machine using [AE
    export AWS_SECRET_ACCESS_KEY=yyy
    ```
 
+3. Adjust AWS [S3 bucket name and dir](group_vars/all/aem.yml#L7-L8) and upload AEM library files (aem-sdk.jar, cq-quickstart.jar, license.properties, etc)
+
 # Building 
 
 Running this command will launch AWS EC2 Machine, invoke [Ansible playbook](aem_single.yml), then terminate machine.
