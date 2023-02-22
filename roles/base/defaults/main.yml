@@ -9,7 +9,7 @@ aem_cli_filename: "aemc-cli_{{ aem_os }}_{{ aem_arch }}.{{ aem_ext }}"
 aem_cli_archive_url: "https://github.com/wttech/aemc/releases/download/v{{ aem_cli_version }}/{{ aem_cli_filename }}"
 aem_cli_archive_file: "{{ aem_tmp_dir }}/aemc-cli/archive/{{ aem_cli_filename }}"
 
-aem_arch: "{{ aem_os_map[ansible_architecture] | default(ansible_architecture) }}"
+aem_arch: "{{ aem_arch_map[ansible_architecture] | default(ansible_architecture) }}"
 aem_os: "{{ aem_os_map[ansible_os_family] | default('linux') }}"
 aem_ext: "{{ aem_ext_map[ansible_os_family] | default('tar.gz') }}"
 

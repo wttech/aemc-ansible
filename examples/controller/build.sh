@@ -1,3 +1,3 @@
 #!/bin/sh
 
-docker build -t wttech/aemc/controller-aws .
+docker build --no-cache -t wttech/aemc/controller-aws .
