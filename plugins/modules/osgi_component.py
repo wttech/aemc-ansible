@@ -3,7 +3,6 @@
 from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
-import yaml
 
 from ansible.module_utils.basic import AnsibleModule
 from ..module_utils.cli import AEMC, AEMC_arg_spec

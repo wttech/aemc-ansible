@@ -2,7 +2,7 @@
 aem_home_dir: "/opt/aem"
 aem_tmp_dir: "{{ aem_home_dir }}/tmp"
 
-aem_cli_version: "1.0.18"
+aem_cli_version: "1.0.25"
 aem_cli_executable: "{{ aem_tmp_dir }}/aemc-cli/lib/{{ aem_cli_version }}/aem"
 aem_cli_filename: "aemc-cli_{{ aem_os }}_{{ aem_arch }}.{{ aem_ext }}"
 
