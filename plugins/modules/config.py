@@ -29,11 +29,23 @@ RETURN = r'''
 def run_module():
     module = AnsibleModule(
         argument_spec=AEMC_arg_spec(dict(
-            command=dict(type='str', default='list')
-        ))
+            command=dict(type='str', required=True),
+            file=dict(type='str'),
+        )),
+        required_if=[
+            ('command', 'export', ['file']),
+        ]
     )
     aemc = AEMC(module)
-    aemc.handle_json(args=['config', module.params['command']])
+    command = module.params['command']
+
+    args = ['config', command]
+
+    file = module.params['file']
+    if file:
+        args.extend(['--file', file])
+
+    aemc.handle_json(args=args)
 
 
 def main():

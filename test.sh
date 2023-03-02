@@ -8,17 +8,12 @@ FLAGS=${3:-"-v"}
 
 # ===== Prerequisites =====
 
-if [ -z ${AEM_CLI_EXECUTABLE+x} ]; then
-  echo ""
-  echo "===== Building AEM Compose CLI ====="
-  echo ""
-
-  (cd ../aemc && make install)
-fi
-
 echo ""
 echo "===== Installing AEM Compose Ansible Collection ====="
 echo ""
+
+# TODO export AEM_CLI_EXECUTABLE=$(whereis aem) / but without 'aem:' prefix
+# (cd ../aemc && make install)
 
 sh install.sh
 

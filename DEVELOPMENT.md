@@ -38,6 +38,8 @@ sh test.sh instance minimal
 sh test.sh instance minimal -vvv
 sh test.sh instance extensive
 sh test.sh instance extensive -vvv
+sh test.sh instance config
+sh test.sh instance config -vvv
 ```
 
 See results:
