@@ -12,8 +12,8 @@ echo ""
 echo "===== Installing AEM Compose Ansible Collection ====="
 echo ""
 
-# TODO export AEM_CLI_EXECUTABLE=$(whereis aem) / but without 'aem:' prefix
-# (cd ../aemc && make install)
+(cd ../aemc && make install)
+export AEM_CLI_EXECUTABLE=$(whereis aem | awk -F': ' '{print $2}')
 
 sh install.sh
 

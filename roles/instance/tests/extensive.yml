@@ -4,6 +4,10 @@
   roles:
     - wttech.aem.instance
   tasks:
+    - name: setup Crypto Support
+      wttech.aem.crypto:
+        command: setup
+
     # Package tests
 
     - name: download CLI archive
