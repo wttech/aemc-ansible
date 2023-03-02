@@ -74,6 +74,10 @@ Configuration changes are applied idempotently in the Ansible spirit to reduce e
           transportPassword: "{{ aem.instance.config.local_publish.password }}"
           userId: "{{ aem.instance.config.local_publish.user }}"
     
+    - name: setup Crypto Support
+      wttech.aem.crypto:
+        command: setup
+    
     - name: deploy APM package
       wttech.aem.pkg:
         command: deploy
