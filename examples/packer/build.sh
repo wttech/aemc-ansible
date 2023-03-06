@@ -9,9 +9,22 @@ if [ -z ${AWS_SECRET_ACCESS_KEY+x} ]; then
   exit 1
 fi
 
-docker run \
-  -v "$(pwd):/controller" \
-  -e AWS_ACCESS_KEY_ID \
-  -e AWS_SECRET_ACCESS_KEY \
-  wttech/aemc/controller-aws \
-  packer build "$@" .
+ACTION=${1:-build}
+
+if [ "$ACTION" = "debug" ]; then
+  docker run -i -t \
+    -v "$(pwd):/controller" \
+    -e PACKER_LOG=1 \
+    -e PACKER_LOG_PATH="packer.log" \
+    -e AWS_ACCESS_KEY_ID \
+    -e AWS_SECRET_ACCESS_KEY \
+    wttech/aemc/controller-aws \
+    packer build -on-error=abort -debug .
+else
+  docker run \
+    -v "$(pwd):/controller" \
+    -e AWS_ACCESS_KEY_ID \
+    -e AWS_SECRET_ACCESS_KEY \
+    wttech/aemc/controller-aws \
+    packer build .
+fi

@@ -44,7 +44,7 @@ sh build.sh
 To [debug](https://developer.hashicorp.com/packer/docs/commands/build#debug) build process e.g do not terminate machine too quickly, run:
 
 ```shell
-sh build.sh -debug
+sh build.sh debug
 ```
 
 # Known issues
