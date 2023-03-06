@@ -24,11 +24,70 @@
     # overwrite: never
   with_items: "{{ aem_lib_s3_items.s3_keys }}"
 
-- name: Create instance(s)
-  wttech.aem.instance:
-    command: create
+- name: Create configuration file
+  template:
+    src: aem.yml
+    dest: "{{ aem_config_file }}"
+  notify:
+    - Restart AEM service
 
-- name: Turn on instance(s)
+- name: Create system script
+  template:
+    src: aem.sh
+    dest: "{{ aem_system_script }}"
+    mode: a+x
+  notify:
+    - Restart AEM service
+
+- name: Create system group
+  group:
+    name: "{{ aem_system_group }}"
+    state: present
+
+- name: Create system user
+  user:
+    name: "{{ aem_system_user }}"
+    groups: "{{ aem_system_group }}"
+    append: yes
+    system: yes
+    state: present
+
+- name: Create system service
+  template:
+    src: aem.service
+    dest: "/etc/systemd/system/{{ aem_system_service }}.service"
+    mode: "0644"
+  register: service_template
+  notify:
+    - Restart AEM service
+
+- name: Enable system service
+  systemd:
+    name: "{{ aem_system_service }}"
+    enabled: yes
+    daemon_reload: yes
+  when: service_template.changed
+
+- block:
+    - name: Start system service
+      service:
+        name: "{{ aem_system_service }}"
+        state: started
+  rescue:
+    - name: Check failed system service
+      shell: "journalctl -u {{ aem_system_service }} -b --no-pager -n 1000"
+      register: res
+    - name: Print failed system service
+      debug:
+        msg: "{{ res.stdout }}"
+    - name: Re-raise failed system service error
+      fail:
+        msg: "{{ ansible_failed_result }}"
+
+- name: flush handlers
+  meta: flush_handlers
+
+- name: Ensure up instance(s)
   wttech.aem.instance:
     command: up
 

@@ -1,8 +1,24 @@
 ---
 
-# - name: Print effective config (debugging)
-#   wttech.aem.config:
-#    command: print
+- name: Ensure config file dir
+  file:
+    path: "{{ aem_home_dir }}/etc"
+    state: directory
+
+- name: Template config file
+  template:
+    src: aem.yml
+    dest: "{{ aem_config_file }}"
+
+- name: Read config file
+  ansible.builtin.shell: "cat {{ aem_config_file }}"
+  no_log: true
+  changed_when: false
+  register: res
+
+- name: Parse config file
+  set_fact:
+    aem: "{{ res.stdout | from_yaml }}"
 
 - name: Create instance(s)
   wttech.aem.instance:

@@ -1,0 +1,16 @@
+---
+- block:
+    - name: Restart AEM service
+      service:
+        name: "{{ aem_system_service }}"
+        state: restarted
+  rescue:
+    - name: Check failed system service
+      shell: "journalctl -u {{ aem_system_service }} -b --no-pager -n 1000"
+      register: res
+    - name: Print failed system service
+      debug:
+        msg: "{{ res.stdout }}"
+    - name: Re-raise failed system service error
+      fail:
+        msg: "{{ ansible_failed_result }}"
