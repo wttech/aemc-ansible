@@ -8,12 +8,6 @@
   set_fact:
     aem: "{{ res.stdout | from_yaml }}"
 
-- name: Ensure up instance(s)
-  wttech.aem.instance:
-    command: up
-    become: yes
-    become_user: "{{ aem_system_user }}"
-
 - name: Enable CRX DE
   wttech.aem.osgi_config:
     command: save

@@ -1,7 +1,22 @@
-- name: Ensure library dir
+- name: Create system group
+  group:
+    name: "{{ aem_system_group }}"
+    state: present
+
+- name: Create system user
+  user:
+    name: "{{ aem_system_user }}"
+    groups: "{{ aem_system_group }}"
+    append: yes
+    system: yes
+    state: present
+
+- name: Create library dir
   file:
     path: "{{ aem_lib_dir }}"
     state: directory
+    owner: "{{ aem_system_user }}"
+    group: "{{ aem_system_group }}"
 
 - name: Find library files on S3
   aws_s3:
@@ -24,15 +39,19 @@
     # overwrite: never
   with_items: "{{ aem_lib_s3_items.s3_keys }}"
 
-- name: Ensure config directory
+- name: Create config directory
   file:
     path: "{{ aem_home_dir }}/etc"
     state: directory
+    owner: "{{ aem_system_user }}"
+    group: "{{ aem_system_group }}"
 
 - name: Create config file
   template:
     src: aem.yml
     dest: "{{ aem_config_file }}"
+    owner: "{{ aem_system_user }}"
+    group: "{{ aem_system_group }}"
   notify:
     - Restart AEM service
 
@@ -43,19 +62,6 @@
     mode: a+x
   notify:
     - Restart AEM service
-
-- name: Create system group
-  group:
-    name: "{{ aem_system_group }}"
-    state: present
-
-- name: Create system user
-  user:
-    name: "{{ aem_system_user }}"
-    groups: "{{ aem_system_group }}"
-    append: yes
-    system: yes
-    state: present
 
 - name: Create system service
   template:
@@ -92,8 +98,11 @@
 - name: flush handlers
   meta: flush_handlers
 
-- block:
-    - name: Provision instance(s)
-      include_tasks: provision.yml
-  become: true
-  become_user: "{{ aem_system_user }}"
+- name: Ensure up instance(s)
+  wttech.aem.instance:
+    command: up
+    become: yes
+    become_user: "{{ aem_system_user }}"
+
+- name: Provision instance(s)
+  include_tasks: provision.yml
