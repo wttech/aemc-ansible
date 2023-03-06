@@ -12,6 +12,8 @@ fi
 ACTION=${1:-build}
 
 if [ "$ACTION" = "debug" ]; then
+  touch packer.log
+
   docker run -i -t \
     -v "$(pwd):/controller" \
     -e PACKER_LOG=1 \
