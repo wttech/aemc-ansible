@@ -1,5 +1,6 @@
 ---
-aem_home_dir: "/opt/aem"
+aem_root_dir: "/opt/aem"
+aem_home_dir: "{{ aem_root_dir }}/home"
 aem_tmp_dir: "{{ aem_home_dir }}/tmp"
 
 aem_cli_version: "1.0.28"

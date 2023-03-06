@@ -27,8 +27,8 @@ echo "Playbook: ${PLAYBOOK}"
 echo ""
 
 run_ansible() {
-  AEM_HOME_DIR="$(pwd)/roles/${ROLE}/tests/aem/home"
-  cd "roles/${ROLE}/tests" && ansible-playbook -i "inventory" "${PLAYBOOK}.yml" --connection=local -e aem_home_dir="$AEM_HOME_DIR" "${FLAGS}"
+  AEM_ROOT_DIR="$(pwd)/roles/${ROLE}/tests/aem"
+  cd "roles/${ROLE}/tests" && ansible-playbook -i "inventory" "${PLAYBOOK}.yml" --connection=local -e aem_root_dir="$AEM_ROOT_DIR" "${FLAGS}"
 }
 ( run_ansible )
 

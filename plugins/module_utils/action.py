@@ -3,7 +3,7 @@ from __future__ import (absolute_import, division, print_function)
 __metaclass__ = type
 
 from ansible.plugins.action import ActionBase
-from ..module_utils.cli import EXECUTABLE_VAR, CONFIG_VAR, CONFIG_PARAM, EXECUTABLE_PARAM
+from ..module_utils.cli import EXECUTABLE_PARAM, CONFIG_FILE_PARAM, CONFIG_DICT_PARAM, EXECUTABLE_PARAM
 
 
 class AemActionBase(ActionBase):
@@ -14,16 +14,21 @@ class AemActionBase(ActionBase):
         module_args = self._task.args.copy()
         tpl_vars = self._templar.available_variables
 
-        module_args[CONFIG_PARAM] = {}
-        if CONFIG_VAR in task_vars:
-            module_args[CONFIG_PARAM].update(self._templar.template(task_vars[CONFIG_VAR]))
-        if CONFIG_VAR in tpl_vars:
-            module_args[CONFIG_PARAM].update(self._templar.template(tpl_vars[CONFIG_VAR]))
+        if EXECUTABLE_PARAM in task_vars:
+            module_args[EXECUTABLE_PARAM] = self._templar.template(task_vars[EXECUTABLE_PARAM])
+        elif EXECUTABLE_PARAM in tpl_vars:
+            module_args[EXECUTABLE_PARAM] = self._templar.template(tpl_vars[EXECUTABLE_PARAM])
 
-        if EXECUTABLE_VAR in task_vars:
-            module_args[EXECUTABLE_PARAM] = self._templar.template(task_vars[EXECUTABLE_VAR])
-        elif EXECUTABLE_VAR in tpl_vars:
-            module_args[EXECUTABLE_PARAM] = self._templar.template(tpl_vars[EXECUTABLE_VAR])
+        if CONFIG_FILE_PARAM in task_vars:
+            module_args[CONFIG_FILE_PARAM] = self._templar.template(task_vars[CONFIG_FILE_PARAM])
+        elif CONFIG_FILE_PARAM in tpl_vars:
+            module_args[CONFIG_FILE_PARAM] = self._templar.template(tpl_vars[CONFIG_FILE_PARAM])
+
+        module_args[CONFIG_DICT_PARAM] = {}
+        if CONFIG_DICT_PARAM in task_vars:
+            module_args[CONFIG_DICT_PARAM].update(self._templar.template(task_vars[CONFIG_DICT_PARAM]))
+        if CONFIG_DICT_PARAM in tpl_vars:
+            module_args[CONFIG_DICT_PARAM].update(self._templar.template(tpl_vars[CONFIG_DICT_PARAM]))
 
         module_result = self._execute_module(
             module_name=self._task.action,
