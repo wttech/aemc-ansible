@@ -7,15 +7,15 @@ instance:
   # Defined strictly with full details (local or remote)
   config:
     local_author:
-      http_url: http://127.0.0.1:4502
+      http_url: {{ aem_author_http_url }}
       user: admin
       password: admin
       run_modes: [ local ]
       jvm_opts:
         - -server
         - -Djava.awt.headless=true
-        - "-Djava.io.tmpdir={{ aem_tmp_dir }}"
-        - -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:14502
+        - -Djava.io.tmpdir={{ aem_tmp_dir }}
+        - -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address={{ aem_author_debug_addr }}
         - -Duser.language=en
         - -Duser.country=US
         - -Duser.timezone=UTC
@@ -26,15 +26,15 @@ instance:
         - ACME_VAR=value
       sling_props: []
     local_publish:
-      http_url: http://127.0.0.1:4503
+      http_url: {{ aem_publish_http_url }}
       user: admin
       password: admin
       run_modes: [ local ]
       jvm_opts:
         - -server
         - -Djava.awt.headless=true
-        - "-Djava.io.tmpdir={{ aem_tmp_dir }}"
-        - -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:14503
+        - -Djava.io.tmpdir={{ aem_tmp_dir }}
+        - -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address={{ aem_publish_debug_addr }}
         - -Duser.language=en
         - -Duser.country=US
         - -Duser.timezone=UTC
@@ -48,8 +48,8 @@ instance:
   # Filters for defined
   filter:
     id: ""
-    author: "{{ aem_instance_author_enabled }}"
-    publish: "{{ aem_instance_publish_enabled }}"
+    author: {{ aem_author_enabled }}
+    publish: {{ aem_publish_enabled }}
 
   # Tuning performance & reliability
   # 'auto'     - for more than 1 local instances - 'serial', otherwise 'parallel'

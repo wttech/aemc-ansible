@@ -10,13 +10,3 @@ aem_config_file: "{{ aem_home_dir}}/etc/aem.yml"
 aem_lib_s3_bucket: "aemc"
 aem_lib_s3_folder: "project/cloud/lib"
 
-aem_system_script: /usr/local/bin/aem
-aem_system_service: aem
-aem_system_user: aem
-aem_system_group: aem
-
-aem_instance_author_enabled: true
-aem_instance_publish_enabled: true
-
-aem_dispatcher_ip: 127.0.0.1
-aem_dispatcher_http_url: "http://{{ aem_dispatcher_ip }}"
