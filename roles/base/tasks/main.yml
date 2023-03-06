@@ -30,4 +30,4 @@
     - name: Make CLI executable
       ansible.builtin.file:
         path: "{{ aem_cli_executable }}"
-        mode: 0744
+        mode: "0755"
