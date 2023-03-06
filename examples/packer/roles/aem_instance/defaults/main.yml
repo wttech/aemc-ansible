@@ -1,5 +1,15 @@
 ---
 
+aem_root_dir: "/opt/aem"
+aem_home_dir: "{{ aem_root_dir }}/home"
+aem_tmp_dir: "{{ aem_home_dir }}/tmp"
+aem_lib_dir: "{{ aem_home_dir }}/lib"
+
+aem_config_file: "{{ aem_home_dir}}/etc/aem.yml"
+
+aem_lib_s3_bucket: "aemc"
+aem_lib_s3_folder: "project/cloud/lib"
+
 aem_system_script: /usr/local/bin/aem
 aem_system_service: aem
 aem_system_user: aem
