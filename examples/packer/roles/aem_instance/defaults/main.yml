@@ -8,7 +8,7 @@ aem_lib_dir: "{{ aem_home_dir }}/lib"
 aem_config_file: "{{ aem_home_dir}}/etc/aem.yml"
 
 aem_lib_s3_bucket: "aemc"
-aem_lib_s3_folder: "project/cloud/lib"
+aem_lib_s3_folder: "project/cloud/aem/instance"
 
 aem_system_script: /usr/local/bin/aem
 aem_system_service: aem
