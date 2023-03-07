@@ -11,12 +11,13 @@
     system: yes
     state: present
 
-- name: Create library dir
+- name: Create directories
   file:
-    path: "{{ aem_lib_dir }}"
+    path: "{{ item }}"
     state: directory
     owner: "{{ aem_system_user }}"
     group: "{{ aem_system_group }}"
+  with_items: [aem_root_dir, aem_defaults_dir, aem_home_dir, aem_var_dir, aem_lib_dir, aem_config_dir, aem_tmp_dir]
 
 - name: Find library files on S3
   aws_s3:
@@ -39,12 +40,6 @@
     # overwrite: never
   with_items: "{{ aem_lib_s3_items.s3_keys }}"
 
-- name: Create config directory
-  file:
-    path: "{{ aem_home_dir }}/etc"
-    state: directory
-    owner: "{{ aem_system_user }}"
-    group: "{{ aem_system_group }}"
 
 - name: Create config file
   template:

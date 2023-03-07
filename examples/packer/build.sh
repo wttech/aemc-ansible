@@ -21,7 +21,7 @@ if [ "$ACTION" = "debug" ]; then
     -e AWS_ACCESS_KEY_ID \
     -e AWS_SECRET_ACCESS_KEY \
     wttech/aemc/controller-aws \
-    packer build -on-error=abort -debug .
+    packer build -debug .
 else
   docker run \
     -v "$(pwd):/controller" \

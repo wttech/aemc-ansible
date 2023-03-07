@@ -8,7 +8,7 @@ After=cloud-final.service
 [Service]
 Type=forking
 
-ExecStart={{ aem_system_script }} start
+ExecStart={{ aem_system_script }} launch
 ExecStop={{ aem_system_script }} stop
 ExecReload={{ aem_system_script }} restart
 KillMode=process
