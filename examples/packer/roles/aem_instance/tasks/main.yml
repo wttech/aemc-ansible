@@ -80,12 +80,12 @@
   become: true
   become_user: "{{ aem_system_user }}"
 
-#- name: Start instance(s)
-#  wttech.aem.instance:
-#    command: start
-#  become: true
-#  become_user: "{{ aem_system_user }}"
-#  register: instance_start
+- name: Start instance(s)
+  wttech.aem.instance:
+    command: start
+  become: true
+  become_user: "{{ aem_system_user }}"
+  register: instance_start
 
 #- name: flush handlers
 #  meta: flush_handlers
