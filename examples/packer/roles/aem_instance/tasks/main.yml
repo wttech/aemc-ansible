@@ -1,3 +1,8 @@
+# TODO https://experienceleague.adobe.com/docs/experience-manager-65/deploying/introduction/technical-requirements.html
+- name: Disable SELinux
+  ansible.posix.selinux:
+    state: disabled
+
 - name: Create system group
   group:
     name: "{{ aem_system_group }}"
@@ -17,7 +22,7 @@
     state: directory
     owner: "{{ aem_system_user }}"
     group: "{{ aem_system_group }}"
-  with_items: [aem_root_dir, aem_defaults_dir, aem_home_dir, aem_var_dir, aem_lib_dir, aem_config_dir, aem_tmp_dir]
+  with_items: "{{ aem_dirs }}"
 
 - name: Find library files on S3
   aws_s3:

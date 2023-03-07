@@ -8,6 +8,15 @@ aem_tmp_dir: "{{ aem_home_dir }}/tmp"
 aem_lib_dir: "{{ aem_home_dir }}/lib"
 aem_var_dir: "{{ aem_home_dir }}/var"
 
+aem_dirs:
+  - "{{ aem_root_dir }}"
+  - "{{ aem_defaults_dir }}"
+  - "{{ aem_home_dir }}"
+  - "{{ aem_var_dir }}"
+  - "{{ aem_lib_dir }}"
+  - "{{ aem_config_dir }}"
+  - "{{ aem_tmp_dir }}"
+
 aem_config_file: "{{ aem_home_dir}}/etc/aem.yml"
 
 aem_lib_s3_bucket: "aemc"
