@@ -7,6 +7,7 @@ aem_config_dir: "{{ aem_home_dir }}/etc"
 aem_tmp_dir: "{{ aem_home_dir }}/tmp"
 aem_lib_dir: "{{ aem_home_dir }}/lib"
 aem_var_dir: "{{ aem_home_dir }}/var"
+aem_tool_dir: "{{ aem_home_dir }}/opt"
 
 aem_dirs:
   - "{{ aem_root_dir }}"
@@ -16,6 +17,7 @@ aem_dirs:
   - "{{ aem_lib_dir }}"
   - "{{ aem_config_dir }}"
   - "{{ aem_tmp_dir }}"
+  - "{{ aem_tool_dir }}"
 
 aem_config_file: "{{ aem_home_dir}}/etc/aem.yml"
 

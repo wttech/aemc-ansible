@@ -24,9 +24,9 @@
   wttech.aem.instance:
     command: create
 
-- name: Turn on instance(s)
+- name: Start instance(s)
   wttech.aem.instance:
-    command: up
+    command: start
 
 - name: Enable CRX DE
   wttech.aem.osgi_config:

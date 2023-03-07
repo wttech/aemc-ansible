@@ -102,6 +102,8 @@ instance:
     unpack_dir: "{{ aem_home_dir }}/var/instance"
     # Archived runtime dir (AEM backup files '*.aemb.zst')
     backup_dir: "{{ aem_home_dir }}/var/backup"
+    # Additional tools needed to manage instance
+    tool_dir: "{{ aem_tool_dir }}"
 
     # Oak Run tool options (offline instance management)
     oakrun:
