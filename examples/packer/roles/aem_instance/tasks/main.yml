@@ -80,12 +80,26 @@
   become: true
   become_user: "{{ aem_system_user }}"
 
+- name: Create install dir
+  file:
+    path: "{{ aem_var_dir }}/instance/author/crx-quickstart/install"
+    state: directory
+
+- name: Copy config for log support
+  template:
+    src: install/org.apache.sling.commons.log.LogManager.config
+    dest: "{{ aem_var_dir }}/instance/author/crx-quickstart/install/org.apache.sling.commons.log.LogManager.config"
+
 - name: Start instance(s)
   wttech.aem.instance:
     command: start
   become: true
   become_user: "{{ aem_system_user }}"
   register: instance_start
+
+- name: Pause for 3 minutes
+  ansible.builtin.pause:
+    minutes: 3
 
 #- name: flush handlers
 #  meta: flush_handlers
