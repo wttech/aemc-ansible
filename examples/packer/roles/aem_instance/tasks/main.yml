@@ -93,7 +93,7 @@
 #- name: Await instance(s)
 #  wttech.aem.instance:
 #    command: await
-#  become: yes
+#  become: true
 #  become_user: "{{ aem_system_user }}"
 
 #- name: Read config file
