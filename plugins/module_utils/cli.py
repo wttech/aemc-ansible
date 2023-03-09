@@ -90,7 +90,7 @@ class AEMC(object):
     def _run_executable(self, args, data):
         json_str = ''
         try:
-            (rc, out, err) = self.module.run_command(args=args, data=data, environ_update=dict(
+            (rc, out, err) = self.module.run_command(args=args, data=data, close_fds=False, environ_update=dict(
                 AEM_CONFIG_FILE=self._handle_config_file(),
                 AEM_INPUT_FILE='STDIN',
                 AEM_INPUT_FORMAT='yml',

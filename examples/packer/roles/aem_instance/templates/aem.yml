@@ -11,14 +11,14 @@ instance:
       user: admin
       password: admin
       run_modes: [ local ]
-      jvm_opts:
-        - -server
-        - -Djava.awt.headless=true
-        - -Djava.io.tmpdir={{ aem_tmp_dir }}
-        - -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address={{ aem_author_debug_addr }}
-        - -Duser.language=en
-        - -Duser.country=US
-        - -Duser.timezone=UTC
+      jvm_opts: []
+#        - -server
+#        - -Djava.awt.headless=true
+#        - -Djava.io.tmpdir={{ aem_tmp_dir }}
+#        - -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address={{ aem_author_debug_addr }}
+#        - -Duser.language=en
+#        - -Duser.country=US
+#        - -Duser.timezone=UTC
       start_opts: []
       secret_vars:
         - ACME_SECRET=value
@@ -30,14 +30,14 @@ instance:
       user: admin
       password: admin
       run_modes: [ local ]
-      jvm_opts:
-        - -server
-        - -Djava.awt.headless=true
-        - -Djava.io.tmpdir={{ aem_tmp_dir }}
-        - -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address={{ aem_publish_debug_addr }}
-        - -Duser.language=en
-        - -Duser.country=US
-        - -Duser.timezone=UTC
+      jvm_opts: []
+#        - -server
+#        - -Djava.awt.headless=true
+#        - -Djava.io.tmpdir={{ aem_tmp_dir }}
+#        - -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address={{ aem_publish_debug_addr }}
+#        - -Duser.language=en
+#        - -Duser.country=US
+#        - -Duser.timezone=UTC
       start_opts: []
       secret_vars:
         - ACME_SECRET=value
