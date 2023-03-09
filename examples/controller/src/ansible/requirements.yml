@@ -11,4 +11,4 @@ collections:
   - name: community.general
     version: 2.4.0
   - name: wttech.aem
-    version: 1.0.34
+    version: 1.0.35
