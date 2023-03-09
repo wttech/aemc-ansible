@@ -71,21 +71,35 @@
     dest: "{{ aem_config_file }}"
     owner: "{{ aem_system_user }}"
     group: "{{ aem_system_group }}"
-#  notify:
-#    - Restart instance(s)
+  notify:
+    - Restart instance(s)
+
+- name: Read config file
+  ansible.builtin.shell: "cat {{ aem_config_file }}"
+  no_log: true
+  changed_when: false
+  register: res
+
+- name: Parse config file
+  set_fact:
+    aem: "{{ res.stdout | from_yaml }}"
 
 - name: Create instance(s)
   wttech.aem.instance:
     command: create
   become: true
   become_user: "{{ aem_system_user }}"
+  notify:
+    - Restart instance(s)
 
-- name: Start instance(s)
+- name: flush handlers
+  meta: flush_handlers
+
+- name: Await instance(s)
   wttech.aem.instance:
-    command: start
+    command: await
   become: true
   become_user: "{{ aem_system_user }}"
-  register: instance_start
 
 #- name: flush handlers
 #  meta: flush_handlers

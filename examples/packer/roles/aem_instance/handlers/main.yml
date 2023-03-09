@@ -1,7 +1,5 @@
 ---
-#- name: Restart instance(s)
-#  wttech.aem.instance:
-#    command: restart
-#  become: true
-#  become_user: "{{ aem_system_user }}"
-#  when: not instance_start.changed
+- name: Restart instance(s)
+  ansible.builtin.systemd:
+    name: "{{ aem_system_service }}.service"
+    state: restarted
