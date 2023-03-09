@@ -1,4 +1,3 @@
-# TODO https://experienceleague.adobe.com/docs/experience-manager-65/deploying/introduction/technical-requirements.html
 - name: Disable SELinux
   ansible.posix.selinux:
     state: disabled
@@ -71,44 +70,25 @@
     dest: "{{ aem_config_file }}"
     owner: "{{ aem_system_user }}"
     group: "{{ aem_system_group }}"
-#  notify:
-#    - Restart instance(s)
+  notify:
+    - Restart instance(s)
 
 - name: Create instance(s)
   wttech.aem.instance:
     command: create
   become: true
   become_user: "{{ aem_system_user }}"
+  notify:
+    - Restart instance(s)
 
-- name: Create install dir
-  file:
-    path: "{{ aem_var_dir }}/instance/author/crx-quickstart/install"
-    state: directory
+- name: Flush handlers
+  meta: flush_handlers
 
-- name: Copy config for log support
-  template:
-    src: install/org.apache.sling.commons.log.LogManager.config
-    dest: "{{ aem_var_dir }}/instance/author/crx-quickstart/install/org.apache.sling.commons.log.LogManager.config"
-
-- name: Start instance(s)
+- name: Await instance(s)
   wttech.aem.instance:
-    command: start
-  become: true
+    command: await
+  become: yes
   become_user: "{{ aem_system_user }}"
-  register: instance_start
-
-- name: Pause for 3 minutes
-  ansible.builtin.pause:
-    minutes: 3
-
-#- name: flush handlers
-#  meta: flush_handlers
-#
-#- name: Await instance(s)
-#  wttech.aem.instance:
-#    command: await
-#  become: yes
-#  become_user: "{{ aem_system_user }}"
 
 #- name: Read config file
 #  ansible.builtin.shell: "cat {{ aem_config_file }}"

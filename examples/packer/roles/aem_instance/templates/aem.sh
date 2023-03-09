@@ -2,13 +2,7 @@
 
 {{ ansible_managed | comment }}
 
-aem_launch() {
-  su - "{{ aem_system_user }}" -c ". /etc/profile && cd {{ aem_root_dir | dirname }} && {{ aem_cli_executable }} instance launch"
-}
-
-aem_terminate() {
-  su - "{{ aem_system_user }}" -c ". /etc/profile && cd {{ aem_root_dir | dirname }} && {{ aem_cli_executable }} instance terminate"
-}
+# TODO export AEM_INSTANCE_LOCAL_SERVICE_MODE=true
 
 aem_start() {
   su - "{{ aem_system_user }}" -c ". /etc/profile && cd {{ aem_root_dir | dirname }} && {{ aem_cli_executable }} instance start"
@@ -23,12 +17,6 @@ aem_status() {
 }
 
 case "$1" in
-  launch)
-    aem_launch
-  ;;
-  terminate)
-    aem_terminate
-  ;;
   start)
     aem_start
   ;;
@@ -43,7 +31,7 @@ case "$1" in
     aem_status
   ;;
   *)
-  echo "Usage: {launch|terminate|start|stop|restart|status}"
+  echo "Usage: {start|stop|restart|status}"
   exit 1
   ;;
 esac
