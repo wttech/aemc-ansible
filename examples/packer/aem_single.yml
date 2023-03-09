@@ -2,7 +2,7 @@
 - name: Setup 'aem_single' environment (author, publish & dispatcher)
   hosts: [aem_single]
   strategy: mitogen_linear
-  become: yes
+  become: true
   roles:
     - name: aem_instance
       tags: [aem_instance]

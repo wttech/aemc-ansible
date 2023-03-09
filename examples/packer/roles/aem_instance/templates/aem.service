@@ -8,9 +8,9 @@ After=cloud-final.service
 [Service]
 Type=forking
 
-ExecStart={{ aem_system_script }} start
-ExecStop={{ aem_system_script }} stop
-ExecReload={{ aem_system_script }} restart
+ExecStart={{ aem_system_script }} instance start
+ExecStop={{ aem_system_script }} instance stop
+ExecReload={{ aem_system_script }} instance restart
 KillMode=process
 RemainAfterExit=yes
 TimeoutStartSec=1810

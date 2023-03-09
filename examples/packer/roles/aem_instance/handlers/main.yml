@@ -1,5 +1,3 @@
 ---
 - name: Restart instance(s)
-  ansible.builtin.systemd:
-    name: "{{ aem_system_service }}.service"
-    state: restarted
+  include_tasks: roles/aem_instance/tasks/restart.yml

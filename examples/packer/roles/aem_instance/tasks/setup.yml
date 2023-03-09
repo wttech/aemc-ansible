@@ -1,0 +1,93 @@
+---
+
+- name: Disable SELinux
+  ansible.posix.selinux:
+    state: disabled
+
+- name: Create system group
+  group:
+    name: "{{ aem_system_group }}"
+    state: present
+
+- name: Create system user
+  user:
+    name: "{{ aem_system_user }}"
+    groups: "{{ aem_system_group }}"
+    append: yes
+    system: yes
+    state: present
+
+- name: Create system script
+  template:
+    src: aem.sh
+    dest: "{{ aem_system_script }}"
+    mode: a+x
+
+- name: Create system service
+  template:
+    src: aem.service
+    dest: "/etc/systemd/system/{{ aem_system_service }}.service"
+    mode: "0644"
+  register: service_template
+
+- name: Enable system service
+  systemd:
+    name: "{{ aem_system_service }}"
+    enabled: yes
+    daemon_reload: yes
+  when: service_template.changed
+
+- name: Create directories
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ aem_system_user }}"
+    group: "{{ aem_system_group }}"
+  with_items: "{{ aem_dirs }}"
+
+- name: Find library files on S3
+  aws_s3:
+    mode: list
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    bucket: "{{ aem_lib_s3_bucket }}"
+    prefix: "{{ aem_lib_s3_folder }}/"
+    marker: "{{ aem_lib_s3_folder  }}/"
+  register: aem_lib_s3_items
+
+- name: Download library files from S3
+  aws_s3:
+    mode: get
+    aws_access_key: "{{ aws_access_key }}"
+    aws_secret_key: "{{ aws_secret_key }}"
+    bucket: "{{ aem_lib_s3_bucket }}"
+    object: "{{ item }}"
+    dest: "{{ aem_lib_dir }}/{{ item|basename }}"
+    # overwrite: never
+  with_items: "{{ aem_lib_s3_items.s3_keys }}"
+
+- name: Create config file
+  template:
+    src: aem.yml
+    dest: "{{ aem_config_file }}"
+    owner: "{{ aem_system_user }}"
+    group: "{{ aem_system_group }}"
+  notify:
+    - Restart instance(s)
+
+- name: Create instance(s)
+  wttech.aem.instance:
+    command: create
+  become: true
+  become_user: "{{ aem_system_user }}"
+  notify:
+    - Restart instance(s)
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- name: Await instance(s)
+  wttech.aem.instance:
+    command: await
+  become: true
+  become_user: "{{ aem_system_user }}"
