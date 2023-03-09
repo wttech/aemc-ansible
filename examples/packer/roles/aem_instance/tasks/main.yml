@@ -1,4 +1,3 @@
-# TODO https://experienceleague.adobe.com/docs/experience-manager-65/deploying/introduction/technical-requirements.html
 - name: Disable SELinux
   ansible.posix.selinux:
     state: disabled
@@ -92,7 +91,7 @@
   notify:
     - Restart instance(s)
 
-- name: flush handlers
+- name: Flush handlers
   meta: flush_handlers
 
 - name: Await instance(s)
@@ -100,15 +99,6 @@
     command: await
   become: true
   become_user: "{{ aem_system_user }}"
-
-#- name: flush handlers
-#  meta: flush_handlers
-#
-#- name: Await instance(s)
-#  wttech.aem.instance:
-#    command: await
-#  become: true
-#  become_user: "{{ aem_system_user }}"
 
 #- name: Read config file
 #  ansible.builtin.shell: "cat {{ aem_config_file }}"
