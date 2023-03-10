@@ -1,0 +1,16 @@
+---
+
+- name: Try restarting instance(s)
+  block:
+    - name: Restart system service
+      ansible.builtin.systemd:
+        name: "{{ aem_system_service }}.service"
+        state: restarted
+  always:
+    - name: Check system service logs
+      shell: "journalctl -u {{ aem_system_service }} -b --no-pager -n 1000"
+      register: system_logs
+
+    - name: Print system service logs
+      debug:
+        msg: "{{ system_logs.stdout }}"

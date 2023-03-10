@@ -180,6 +180,8 @@ output:
   log:
     # File path of logs written especially when output format is different than 'text'
     file: "{{ aem_home_dir }}/var/log/aem.log"
+    # Controls where outputs and logs should be written to when format is 'text' (console|file|both|none)
+    mode: both
 
 base:
   # Location of temporary files (downloaded AEM packages, etc)

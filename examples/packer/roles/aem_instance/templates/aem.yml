@@ -11,14 +11,14 @@ instance:
       user: admin
       password: admin
       run_modes: [ local ]
-      jvm_opts: []
-#        - -server
-#        - -Djava.awt.headless=true
-#        - -Djava.io.tmpdir={{ aem_tmp_dir }}
-#        - -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address={{ aem_author_debug_addr }}
-#        - -Duser.language=en
-#        - -Duser.country=US
-#        - -Duser.timezone=UTC
+      jvm_opts:
+        - -server
+        - -Djava.awt.headless=true
+        - -Djava.io.tmpdir={{ aem_tmp_dir }}
+        - -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address={{ aem_author_debug_addr }}
+        - -Duser.language=en
+        - -Duser.country=US
+        - -Duser.timezone=UTC
       start_opts: []
       secret_vars:
         - ACME_SECRET=value
@@ -30,14 +30,14 @@ instance:
       user: admin
       password: admin
       run_modes: [ local ]
-      jvm_opts: []
-#        - -server
-#        - -Djava.awt.headless=true
-#        - -Djava.io.tmpdir={{ aem_tmp_dir }}
-#        - -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address={{ aem_publish_debug_addr }}
-#        - -Duser.language=en
-#        - -Duser.country=US
-#        - -Duser.timezone=UTC
+      jvm_opts:
+        - -server
+        - -Djava.awt.headless=true
+        - -Djava.io.tmpdir={{ aem_tmp_dir }}
+        - -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address={{ aem_publish_debug_addr }}
+        - -Duser.language=en
+        - -Duser.country=US
+        - -Duser.timezone=UTC
       start_opts: []
       secret_vars:
         - ACME_SECRET=value
@@ -180,6 +180,8 @@ output:
   log:
     # File path of logs written especially when output format is different than 'text'
     file: "{{ aem_home_dir }}/var/log/aem.log"
+    # Controls where outputs and logs should be written to when format is 'text' (console|file|both|none)
+    mode: both
 
 base:
   # Location of temporary files (downloaded AEM packages, etc)
