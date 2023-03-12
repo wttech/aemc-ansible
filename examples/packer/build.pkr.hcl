@@ -1,3 +1,8 @@
+variable ansible_extra_vars {
+  type =  string
+  default = "aem_project_kind='classic'"
+}
+
 locals {
   timestamp = regex_replace(timestamp(), "[- TZ:]", "")
 
@@ -57,7 +62,7 @@ build {
   provisioner "ansible" {
     command = "./controller-run.sh"
     playbook_file = "aem_single.yml"
-    extra_arguments = ["--verbose"]
+    extra_arguments = ["--verbose", "--extra-vars", "${var.ansible_extra_vars}"]
     host_alias = "${local.host}"
     user = "${local.ssh_user}"
 

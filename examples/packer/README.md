@@ -40,13 +40,15 @@ Set up AEM instances on [AWS EC2](https://aws.amazon.com/ec2/) machine using [AE
 Running this command will launch AWS EC2 Machine, invoke [Ansible playbook](aem_single.yml), then terminate machine.
 
 ```shell
-sh build.sh
+sh build.sh test classic
+sh build.sh test cloud
 ```
 
 To [debug](https://developer.hashicorp.com/packer/docs/commands/build#debug) build process e.g do not terminate machine too quickly, run:
 
 ```shell
-sh build.sh debug
+sh build.sh debug classic
+sh build.sh debug cloud
 ```
 
 # Known issues

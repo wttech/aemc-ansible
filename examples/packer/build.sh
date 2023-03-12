@@ -9,7 +9,10 @@ if [ -z ${AWS_SECRET_ACCESS_KEY+x} ]; then
   exit 1
 fi
 
-ACTION=${1:-build}
+ACTION=${1:-test}
+AEM_PROJECT_KIND=${2:-classic}
+
+export PKR_VAR_ansible_extra_vars="aem_project_kind='${AEM_PROJECT_KIND}'"
 
 if [ "$ACTION" = "debug" ]; then
   touch packer.log

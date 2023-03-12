@@ -1,5 +1,19 @@
 ---
 
+- name: Await instance(s)
+  wttech.aem.instance:
+    command: await
+  become: true
+  become_user: "{{ aem_system_user }}"
+
+- name: Deploy service pack
+  wttech.aem.pkg:
+    command: deploy
+    file: "{{ aem_lib_dir }}/aem-service-pkg-6.5.*.0.zip"
+  become: true
+  become_user: "{{ aem_system_user }}"
+  when: aem_project_kind == 'classic'
+
 - name: Read config file
   ansible.builtin.shell: "cat {{ aem_config_file }}"
   no_log: true
