@@ -39,6 +39,11 @@ Set up AEM instances on [AWS EC2](https://aws.amazon.com/ec2/) with [RHEL](https
 
 Running this command will launch AWS EC2 Machine, invoke [Ansible playbook](aem_single.yml), then terminate machine.
 
+Whole process takes for:
+
+- AEM classic 6.5.x (with SP installation): about 20-25 minutes,
+- AEM cloud 202x.yy: 10-15 minutes.
+
 ```shell
 sh build.sh test classic
 sh build.sh test cloud
