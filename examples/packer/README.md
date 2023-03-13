@@ -5,7 +5,7 @@
 
 # AEM Compose - Packer Example
 
-Set up AEM instances on [AWS EC2](https://aws.amazon.com/ec2/) machine using [AEM Compose Ansible](https://github.com/wttech/aemc-ansible) Modules.
+Set up AEM instances on [AWS EC2](https://aws.amazon.com/ec2/) with [RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) using [AEM Compose Ansible](https://github.com/wttech/aemc-ansible) Modules.
 
 [Packer](https://www.packer.io/) tool used in this example allows to:
 

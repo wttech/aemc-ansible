@@ -1,6 +1,5 @@
 variable ansible_extra_vars {
   type =  string
-  default = "aem_project_kind='classic'"
 }
 
 locals {

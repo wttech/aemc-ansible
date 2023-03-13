@@ -12,9 +12,9 @@ fi
 ACTION=${1:-test}
 AEM_PROJECT_KIND=${2:-classic}
 
-export PKR_VAR_ansible_extra_vars="aem_project_kind='${AEM_PROJECT_KIND}'"
+ANSIBLE_EXTRA_VARS="aem_project_kind='${AEM_PROJECT_KIND}'"
 
-if [ "$ACTION" = "debug" ]; then
+if [ "$ACTION" = "debug" ] ; then
   touch packer.log
 
   docker run -i -t \
@@ -24,12 +24,12 @@ if [ "$ACTION" = "debug" ]; then
     -e AWS_ACCESS_KEY_ID \
     -e AWS_SECRET_ACCESS_KEY \
     wttech/aemc/controller-aws \
-    packer build -debug .
+    packer build -var ansible_extra_vars="$ANSIBLE_EXTRA_VARS" -debug .
 else
   docker run \
     -v "$(pwd):/controller" \
     -e AWS_ACCESS_KEY_ID \
     -e AWS_SECRET_ACCESS_KEY \
     wttech/aemc/controller-aws \
-    packer build .
+    packer build -var ansible_extra_vars="$ANSIBLE_EXTRA_VARS" .
 fi

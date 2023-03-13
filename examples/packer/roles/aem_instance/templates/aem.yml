@@ -155,7 +155,7 @@ java:
   # Require following versions before e.g running AEM instances
   version_constraints: ">= 11, < 12"
 
-  # Pre-installed local JDK dir where closed source Oracle Java is installed
+  # Pre-installed local JDK dir (Oracle Java)
   home_dir: "{{ aem_java_home_dir }}"
 
 output:
