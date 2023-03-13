@@ -1,5 +1,7 @@
 ---
 
+aem_project_kind: classic
+
 aem_root_dir: "/opt/aem"
 aem_defaults_dir: "{{ aem_root_dir }}/defaults"
 aem_home_dir: "{{ aem_root_dir }}/home"
@@ -22,7 +24,10 @@ aem_dirs:
 aem_config_file: "{{ aem_home_dir}}/etc/aem.yml"
 
 aem_lib_s3_bucket: "aemc"
-aem_lib_s3_folder: "project/cloud/aem/instance"
+aem_lib_s3_folder: "project/{{ aem_project_kind }}/aem/instance"
+
+aem_java_lib_file: jdk-11.0.17_linux-x64_bin.rpm
+aem_java_home_dir: /usr/java/jdk-11.0.17
 
 aem_system_script: /usr/bin/aem
 aem_system_service: aem

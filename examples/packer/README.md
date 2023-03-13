@@ -5,7 +5,7 @@
 
 # AEM Compose - Packer Example
 
-Set up AEM instances on [AWS EC2](https://aws.amazon.com/ec2/) machine using [AEM Compose Ansible](https://github.com/wttech/aemc-ansible) Modules.
+Set up AEM instances on [AWS EC2](https://aws.amazon.com/ec2/) with [RHEL](https://www.redhat.com/en/technologies/linux-platforms/enterprise-linux) using [AEM Compose Ansible](https://github.com/wttech/aemc-ansible) Modules.
 
 [Packer](https://www.packer.io/) tool used in this example allows to:
 
@@ -33,20 +33,27 @@ Set up AEM instances on [AWS EC2](https://aws.amazon.com/ec2/) machine using [AE
 
 3. Adjust AWS [S3 bucket name and dir](group_vars/all/aem.yml#L7-L8) and upload AEM library files (aem-sdk.jar, cq-quickstart.jar, license.properties, etc)
 
-   ![S3 Files Structure](docs/s3-files.png)
+   ![S3 Files Structure](docs/s3-files-overview.png)
 
 # Building 
 
 Running this command will launch AWS EC2 Machine, invoke [Ansible playbook](aem_single.yml), then terminate machine.
 
+Whole process takes for:
+
+- AEM classic 6.5.x (with SP installation): about 20-25 minutes,
+- AEM cloud 202x.yy: 10-15 minutes.
+
 ```shell
-sh build.sh
+sh build.sh test classic
+sh build.sh test cloud
 ```
 
 To [debug](https://developer.hashicorp.com/packer/docs/commands/build#debug) build process e.g do not terminate machine too quickly, run:
 
 ```shell
-sh build.sh debug
+sh build.sh debug classic
+sh build.sh debug cloud
 ```
 
 # Known issues

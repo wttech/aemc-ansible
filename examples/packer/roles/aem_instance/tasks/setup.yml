@@ -45,7 +45,7 @@
     group: "{{ aem_system_group }}"
   with_items: "{{ aem_dirs }}"
 
-- name: Find library files on S3
+- name: Find library files
   aws_s3:
     mode: list
     aws_access_key: "{{ aws_access_key }}"
@@ -55,7 +55,7 @@
     marker: "{{ aem_lib_s3_folder  }}/"
   register: aem_lib_s3_items
 
-- name: Download library files from S3
+- name: Download library files
   aws_s3:
     mode: get
     aws_access_key: "{{ aws_access_key }}"
@@ -65,6 +65,13 @@
     dest: "{{ aem_lib_dir }}/{{ item|basename }}"
     # overwrite: never
   with_items: "{{ aem_lib_s3_items.s3_keys }}"
+
+- name: Install Java
+  dnf:
+    name: "{{ aem_lib_dir }}/{{ aem_java_lib_file }}"
+    disable_gpg_check: true
+    skip_broken: true
+    state: present
 
 - name: Create config file
   template:
@@ -85,9 +92,3 @@
 
 - name: Flush handlers
   meta: flush_handlers
-
-- name: Await instance(s)
-  wttech.aem.instance:
-    command: await
-  become: true
-  become_user: "{{ aem_system_user }}"
