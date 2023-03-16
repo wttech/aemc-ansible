@@ -10,7 +10,8 @@ collections:
     version: 1.2.0
   - name: community.general
     version: 2.4.0
-  - name: wttech.aem
-    version: 1.0.35
-  # - src: https://github.com/wttech/aemc-ansible
-  #   version: "improved-roles"
+  # - name: wttech.aem
+  #   version: 1.0.35
+  - name: https://github.com/wttech/aemc-ansible.git
+    type: git
+    version: improved-roles
