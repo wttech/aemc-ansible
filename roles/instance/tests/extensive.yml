@@ -47,6 +47,13 @@
         props:
           foo: bar3
 
+    - name: Copy some node
+      wttech.aem.repo_node:
+        command: copy
+        instance_id: local_author
+        source_path: /content/foo
+        target_path: /content/foo-copy
+
     # OSGi tests
 
     - name: Read some bundle
