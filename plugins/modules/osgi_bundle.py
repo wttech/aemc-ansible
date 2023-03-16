@@ -59,7 +59,7 @@ def run_module():
         args.extend(['--symbolic-name', symbolic_name])
 
     file = module.params['file']
-    if symbolic_name:
+    if file:
         args.extend(['--file', file])
 
     aemc.handle_json(args=args)

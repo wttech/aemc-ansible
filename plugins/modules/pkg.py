@@ -34,6 +34,7 @@ def run_module():
             file=dict(type='str'),
             pid=dict(type='str'),
             path=dict(type='str'),
+            force=dict(type='bool'),
         )),
         required_if=[
             ('command', 'read', ['instance_id']),
@@ -49,22 +50,28 @@ def run_module():
         ]
     )
     aemc = AEMC(module)
-
     command = module.params['command']
-    instance_id = module.params['instance_id']
-    file = module.params['file']
-    pid = module.params['pid']
-    path = module.params['path']
-
     args = ['pkg', command]
+
+    instance_id = module.params['instance_id']
     if instance_id:
         args.extend(['--instance-id', instance_id])
+
+    file = module.params['file']
     if file:
         args.extend(['--file', file])
+
+    pid = module.params['pid']
     if pid:
         args.extend(['--pid', pid])
+
+    path = module.params['path']
     if path:
         args.extend(['--path', path])
+
+    force = module.params['force']
+    if force is not None:
+        args.extend(['--force', force])
 
     aemc.handle_json(args=args)
 
