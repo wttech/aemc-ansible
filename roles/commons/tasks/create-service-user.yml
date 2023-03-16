@@ -1,0 +1,13 @@
+---
+- name: Create system group
+  group:
+    name: "{{ aem_system_group }}"
+    state: present
+
+- name: Create system user
+  user:
+    name: "{{ aem_system_user }}"
+    groups: "{{ aem_system_group }}"
+    append: yes
+    system: yes
+    state: present

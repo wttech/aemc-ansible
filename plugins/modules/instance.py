@@ -29,11 +29,19 @@ RETURN = r'''
 def run_module():
     module = AnsibleModule(
         argument_spec=AEMC_arg_spec(dict(
-            command=dict(type='str', default='list')
+            command=dict(type='str', default='list'),
+            instance_id=dict(type='str')
         ))
     )
     aemc = AEMC(module)
-    aemc.handle_json(args=['instance', module.params['command']])
+
+    args=['instance', module.params['command']]
+
+    instance_id = module.params['instance_id']
+    if instance_id:
+        args.extend(['--instance-id',  instance_id])
+
+    aemc.handle_json(args=args)
 
 
 def main():

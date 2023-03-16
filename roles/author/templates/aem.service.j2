@@ -1,0 +1,22 @@
+# Multiple AEM instances service managed by AEM Compose CLI
+
+[Unit]
+Description=AEM Instances
+After=network.target
+
+[Service]
+Type=forking
+
+ExecStart={{ aem_author_script }} start
+ExecStop={{ aem_author_script }} stop
+ExecReload={{ aem_author_script }} restart
+User={{ aem_system_user }}
+KillMode=process
+RemainAfterExit=yes
+TimeoutStartSec=1810
+TimeoutStopSec=190
+LimitNOFILE=20000
+PIDFile={{ aem_var_dir }}/instance/author/crx-quickstart/conf/cq.pid
+
+[Install]
+WantedBy=multi-user.target

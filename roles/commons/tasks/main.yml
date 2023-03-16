@@ -1,0 +1,5 @@
+---
+- include_tasks: create-service-user.yml
+- include_tasks: create-directory-structure.yml
+- include_tasks: install-aemc.yml
+- include_tasks: create-aemc-config.yml

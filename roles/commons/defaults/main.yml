@@ -1,0 +1,61 @@
+---
+aem_author_enabled: false
+aem_publish_enabled: false
+
+aem_system_user: aem
+aem_system_group: aem
+
+aem_author_ip: 127.0.0.1
+aem_author_http_url: "http://{{ aem_author_ip }}:4502"
+aem_author_debug_addr: 0.0.0.0:14502
+
+aem_publish_ip: 127.0.0.1
+aem_publish_http_url: "http://{{ aem_publish_ip }}:4503"
+aem_publish_debug_addr: 0.0.0.0:14503
+
+aem_dispatcher_ip: 127.0.0.1
+aem_dispatcher_http_url: "http://{{ aem_dispatcher_ip }}"
+
+aem_root_dir: "/opt/aem"
+aem_defaults_dir: "{{ aem_root_dir }}/defaults"
+aem_home_dir: "{{ aem_root_dir }}/home"
+aem_config_dir: "{{ aem_home_dir }}/etc"
+aem_tmp_dir: "{{ aem_home_dir }}/tmp"
+aem_lib_dir: "{{ aem_home_dir }}/lib"
+aem_var_dir: "{{ aem_home_dir }}/var"
+aem_tool_dir: "{{ aem_home_dir }}/opt"
+
+aem_dirs:
+  - "{{ aem_root_dir }}"
+  - "{{ aem_defaults_dir }}"
+  - "{{ aem_home_dir }}"
+  - "{{ aem_var_dir }}"
+  - "{{ aem_lib_dir }}"
+  - "{{ aem_config_dir }}"
+  - "{{ aem_tmp_dir }}"
+  - "{{ aem_tool_dir }}"
+
+aem_cli_version: "1.0.29"
+aem_cli_executable: "{{ aem_tmp_dir }}/aemc-cli/lib/{{ aem_cli_version }}/aem"
+aem_cli_filename: "aemc-cli_{{ aem_os }}_{{ aem_arch }}.{{ aem_ext }}"
+
+aem_cli_archive_file: "{{ aem_tmp_dir }}/aemc-cli/archive/{{ aem_cli_version }}/{{ aem_cli_filename }}"
+
+aem_cli_archive_url: "https://github.com/wttech/aemc/releases/download/v{{ aem_cli_version }}/{{ aem_cli_filename }}"
+
+aem_arch: "{{ aem_arch_map[ansible_architecture] | default(ansible_architecture) }}"
+aem_os: "{{ aem_os_map[ansible_os_family] | default('linux') }}"
+aem_ext: "{{ aem_ext_map[ansible_os_family] | default('tar.gz') }}"
+
+aem_arch_map:
+  x86_64: amd64
+aem_os_map:
+  Darwin: darwin
+  Windows: windows
+aem_ext_map:
+  Windows: zip
+
+aem_config_file: "{{ aem_home_dir }}/etc/aem.yml"
+
+java_home_dir: ""
+java_version_constraints: ">= 11, < 12"

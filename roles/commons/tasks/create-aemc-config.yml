@@ -1,0 +1,5 @@
+---
+- name: Create aemc config
+  template:
+    src: aem.yml.j2
+    dest: "{{ aem_config_file }}"

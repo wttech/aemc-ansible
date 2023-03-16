@@ -1,0 +1,3 @@
+---
+aem_publish_script: /usr/bin/aem-publish
+aem_publish_service: aem-publish

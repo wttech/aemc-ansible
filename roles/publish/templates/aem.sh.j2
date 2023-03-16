@@ -1,0 +1,49 @@
+#!/bin/sh
+
+{{ ansible_managed | comment }}
+
+aem_launch() {
+  sh -c ". /etc/profile && cd {{ aem_root_dir | dirname }} && {{ aem_cli_executable }} instance launch --instance-publish"
+}
+
+aem_terminate() {
+  sh -c ". /etc/profile && cd {{ aem_root_dir | dirname }} && {{ aem_cli_executable }} instance terminate --instance-publish"
+}
+
+aem_start() {
+  sh -c ". /etc/profile && cd {{ aem_root_dir | dirname }} && {{ aem_cli_executable }} instance start --instance-publish"
+}
+
+aem_stop() {
+  sh -c ". /etc/profile && cd {{ aem_root_dir | dirname }} && {{ aem_cli_executable }} instance stop --instance-publish"
+}
+
+aem_status() {
+  sh -c ". /etc/profile && cd {{ aem_root_dir | dirname }} && {{ aem_cli_executable }} instance status --instance-publish"
+}
+
+case "$1" in
+  launch)
+    aem_launch
+  ;;
+  terminate)
+    aem_terminate
+  ;;
+  start)
+    aem_start
+  ;;
+  stop)
+    aem_stop
+  ;;
+  restart)
+    aem_stop
+    aem_start
+  ;;
+  status)
+    aem_status
+  ;;
+  *)
+  echo "Usage: {launch|terminate|start|stop|restart|status}"
+  exit 1
+  ;;
+esac

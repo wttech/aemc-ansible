@@ -1,0 +1,8 @@
+---
+aem_cli_version: "1.0.29"
+aem_project_kind: classic
+
+s3_bucket_name: "aemc"
+aem_lib_s3_dir: "project/{{ aem_project_kind }}/aem/instance"
+
+aem_cli_archive_location: "url"

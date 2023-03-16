@@ -1,0 +1,68 @@
+---
+- name: Read config file
+  ansible.builtin.shell: "cat {{ aem_config_file }}"
+  no_log: true
+  changed_when: false
+  register: res
+
+- name: Parse config file
+  set_fact:
+    aem: "{{ res.stdout | from_yaml }}"
+
+- name: Create author script
+  template:
+    src: aem.sh.j2
+    dest: "{{ aem_author_script }}"
+    mode: a+x
+
+- name: Create author service
+  template:
+    src: aem.service.j2
+    dest: "/etc/systemd/system/{{ aem_author_service }}.service"
+    mode: "0644"
+  register: service_template
+
+- name: Enable author service
+  systemd:
+    name: "{{ aem_author_service }}"
+    enabled: yes
+    daemon_reload: yes
+  when: service_template.changed
+
+- name: Create author instance
+  wttech.aem.instance:
+    command: create
+    instance_id: local_author
+  become: true
+  become_user: "{{ aem_system_user }}"
+  notify:
+    - Restart author instance
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- name: Await author instance
+  wttech.aem.instance:
+    command: await
+    instance_id: local_author
+
+- name: Enable CRX DE
+  wttech.aem.osgi_config:
+    command: save
+    instance_id: local_author
+    pid: org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet
+    props:
+      alias: /crx/server
+
+- name: Configure replication agent for publishing content
+  wttech.aem.repl_agent:
+    command: setup
+    instance_id: local_author
+    location: author
+    name: publish
+    props:
+      enabled: true
+      transportUri: "{{ aem.instance.config.local_publish.http_url }}/bin/receive?sling:authRequestLogin=1"
+      transportUser: "{{ aem.instance.config.local_publish.user }}"
+      transportPassword: "{{ aem.instance.config.local_publish.password }}"
+      userId: "{{ aem.instance.config.local_publish.user }}"

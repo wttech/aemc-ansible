@@ -1,0 +1,5 @@
+# Python extensions/modules to install on managed node (AWS EC2 Machine)
+boto3
+jsondiff
+pyyaml
+passlib

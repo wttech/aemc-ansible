@@ -1,0 +1,18 @@
+---
+- name: Find library files on S3
+  aws_s3:
+    mode: list
+    bucket: "{{ s3_bucket_name }}"
+    prefix: "{{ aem_lib_s3_dir }}/"
+    marker: "{{ aem_lib_s3_dir  }}/"
+  register: aem_lib_s3_items
+
+- name: Download library files from S3
+  aws_s3:
+    mode: get
+    bucket: "{{ s3_bucket_name }}"
+    object: "{{ item }}"
+    dest: "{{ aem_lib_dir }}/{{ item|basename }}"
+    overwrite: never
+  become: true
+  with_items: "{{ aem_lib_s3_items.s3_keys }}"

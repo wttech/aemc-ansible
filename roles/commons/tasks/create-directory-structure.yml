@@ -1,0 +1,7 @@
+- name: Create directories for AEM
+  file:
+    path: "{{ item }}"
+    state: directory
+    owner: "{{ aem_system_user }}"
+    group: "{{ aem_system_group }}"
+  with_items: "{{ aem_dirs }}"

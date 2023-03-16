@@ -1,0 +1,70 @@
+---
+- name: Read config file
+  ansible.builtin.shell: "cat {{ aem_config_file }}"
+  no_log: true
+  changed_when: false
+  register: res
+
+- name: Parse config file
+  set_fact:
+    aem: "{{ res.stdout | from_yaml }}"
+
+- name: Create publish script
+  template:
+    src: aem.sh.j2
+    dest: "{{ aem_publish_script }}"
+    mode: a+x
+
+- name: Create publish service
+  template:
+    src: aem.service.j2
+    dest: "/etc/systemd/system/{{ aem_publish_service }}.service"
+    mode: "0644"
+  register: service_template
+
+- name: Enable publish service
+  systemd:
+    name: "{{ aem_publish_service }}"
+    enabled: yes
+    daemon_reload: yes
+  when: service_template.changed
+
+- name: Create publish instance
+  wttech.aem.instance:
+    command: create
+    instance_id: local_publish
+  become: true
+  become_user: "{{ aem_system_user }}"
+  notify:
+    - Restart publish instance
+
+- name: Flush handlers
+  meta: flush_handlers
+
+- name: Await publish instance
+  wttech.aem.instance:
+    command: await
+    instance_id: local_publish
+
+- name: Enable CRX DE
+  wttech.aem.osgi_config:
+    command: save
+    instance_id: local_publish
+    pid: org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet
+    props:
+      alias: /crx/server
+
+- name: Configure replication agent for flushing dispatcher cache
+  wttech.aem.repl_agent:
+    command: setup
+    instance_id: local_publish
+    location: publish
+    name: flush
+    props:
+      enabled: true
+      transportUri: "{{ aem_dispatcher_http_url }}/dispatcher/invalidate.cache"
+      protocolHTTPHeaders:
+        - "CQ-Action: {action}"
+        - "CQ-Handle: {path}"
+        - "CQ-Path: {path}"
+        - "Host: publish"

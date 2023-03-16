@@ -1,0 +1,14 @@
+---
+- name: Basic setup of publish and author
+  hosts: aem_single
+  strategy: mitogen_linear
+  tasks:
+    - name: Include roles
+      include_role:
+        name: "{{ item }}"
+      with_items:
+        - aem_base
+        - publish
+        - author
+      vars:
+        ansible_become: yes

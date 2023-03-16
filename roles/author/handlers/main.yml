@@ -1,0 +1,6 @@
+---
+- name: Restart author instance
+  ansible.builtin.systemd:
+    name: "{{ aem_author_service }}.service"
+    state: restarted
+  become: true

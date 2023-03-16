@@ -1,0 +1,4 @@
+---
+- name: Execute common tasks
+  import_role: 
+    name: wttech.aem.commons

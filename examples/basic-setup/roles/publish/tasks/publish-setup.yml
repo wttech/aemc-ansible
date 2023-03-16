@@ -1,0 +1,4 @@
+---
+- name: Setup AEM publish instance
+  import_role: 
+    name: wttech.aem.publish

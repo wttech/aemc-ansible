@@ -1,0 +1,46 @@
+---
+- name: Check executable CLI
+  ansible.builtin.stat:
+    path: "{{ aem_cli_executable }}"
+  register: r
+
+- name: Prepare CLI
+  when: not r.stat.exists
+  block:
+    - name: Create dir for CLI archive
+      ansible.builtin.file:
+        path: "{{ aem_cli_archive_file | dirname }}"
+        state: directory
+
+    - name: Download CLI archive from url
+      ansible.builtin.get_url:
+        url: "{{ aem_cli_archive_url }}"
+        dest: "{{ aem_cli_archive_file }}"
+      when: aem_cli_archive_location == "url"
+
+    - name: Download CLI archive from S3
+      vars:
+        ansible_python_interpreter: /usr/bin/python3
+      aws_s3:
+        mode: get
+        bucket: "{{ s3_bucket_name }}"
+        object: "{{ aem_cli_s3_archive_path }}"
+        dest: "{{ aem_cli_archive_file }}"
+        overwrite: never
+      when: aem_cli_archive_location == "s3"
+
+    - name: Create dir for CLI archive contents
+      ansible.builtin.file:
+        path: "{{ aem_cli_executable | dirname }}"
+        state: directory
+
+    - name: Unpack CLI archive
+      ansible.builtin.unarchive:
+        remote_src: true
+        src: "{{ aem_cli_archive_file }}"
+        dest: "{{ aem_cli_executable | dirname }}"
+
+    - name: Make CLI executable
+      ansible.builtin.file:
+        path: "{{ aem_cli_executable }}"
+        mode: "0755"
