@@ -3,7 +3,7 @@ aem_root_dir: "/opt/aem"
 aem_home_dir: "{{ aem_root_dir }}/home"
 aem_tool_dir: "{{ aem_home_dir }}/opt"
 
-aem_cli_version: "1.1.0"
+aem_cli_version: "1.1.1"
 aem_cli_executable: "{{ aem_tool_dir }}/aemc-cli/lib/{{ aem_cli_version }}/aem"
 aem_cli_filename: "aemc-cli_{{ aem_os }}_{{ aem_arch }}.{{ aem_ext }}"
 
