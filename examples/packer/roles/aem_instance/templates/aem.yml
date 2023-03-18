@@ -6,8 +6,8 @@ instance:
     local_author:
       active: {{ aem_author_active }}
       http_url: {{ aem_author_http_url }}
-      user: admin
-      password: admin
+      user: {{ aem_instance_user }}
+      password: {{ aem_instance_password }}
       run_modes: [ local ]
       jvm_opts:
         - -server
@@ -26,8 +26,8 @@ instance:
     local_publish:
       active: {{ aem_publish_active }}
       http_url: {{ aem_publish_http_url }}
-      user: admin
-      password: admin
+      user: {{ aem_instance_user }}
+      password: {{ aem_instance_password }}
       run_modes: [ local ]
       jvm_opts:
         - -server

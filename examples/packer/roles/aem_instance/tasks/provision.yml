@@ -14,16 +14,6 @@
   become_user: "{{ aem_system_user }}"
   when: aem_project_kind == 'classic'
 
-- name: Read config file
-  ansible.builtin.shell: "cat {{ aem_config_file }}"
-  no_log: true
-  changed_when: false
-  register: res
-
-- name: Parse config file
-  set_fact:
-    aem: "{{ res.stdout | from_yaml }}"
-
 - name: Enable CRX DE
   wttech.aem.osgi_config:
     command: save
@@ -41,10 +31,10 @@
     name: publish
     props:
       enabled: true
-      transportUri: "{{ aem.instance.config.local_publish.http_url }}/bin/receive?sling:authRequestLogin=1"
-      transportUser: "{{ aem.instance.config.local_publish.user }}"
-      transportPassword: "{{ aem.instance.config.local_publish.password }}"
-      userId: "{{ aem.instance.config.local_publish.user }}"
+      transportUri: "{{ aem_publish_http_url }}/bin/receive?sling:authRequestLogin=1"
+      transportUser: "{{ aem_instance_user }}"
+      transportPassword: "{{ aem_instance_password }}"
+      userId: "{{ aem_instance_user }}"
   become: true
   become_user: "{{ aem_system_user }}"
 

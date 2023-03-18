@@ -34,6 +34,9 @@ aem_system_service: aem
 aem_system_user: aem
 aem_system_group: aem
 
+aem_instance_user: admin
+aem_instance_password: admin
+
 aem_author_active: true
 aem_author_ip: 127.0.0.1
 aem_author_http_url: "http://{{ aem_author_ip }}:4502"
