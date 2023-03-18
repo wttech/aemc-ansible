@@ -4,7 +4,7 @@ instance:
   # Full details of local or remote instances
   config:
     local_author:
-      active: {{ aem_author_enabled }}
+      active: {{ aem_author_active }}
       http_url: {{ aem_author_http_url }}
       user: admin
       password: admin
@@ -24,7 +24,7 @@ instance:
         - ACME_VAR=value
       sling_props: []
     local_publish:
-      active: {{ aem_publish_enabled }}
+      active: {{ aem_publish_active }}
       http_url: {{ aem_publish_http_url }}
       user: admin
       password: admin
