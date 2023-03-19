@@ -1,0 +1,11 @@
+---
+- name: Start instances
+  hosts: localhost
+  tasks:
+    - name: Create instance(s)
+      wttech.aem.instance:
+        command: create
+
+    - name: Start instance(s)
+      wttech.aem.instance:
+        command: start

@@ -4,5 +4,5 @@
   strategy: mitogen_linear
   become: true
   roles:
-    - name: aem_instance
+    - name: wttech.aem.instance
       tags: [aem_instance]

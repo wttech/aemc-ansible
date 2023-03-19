@@ -1,0 +1,11 @@
+---
+- name: Destroy instances
+  hosts: localhost
+  tasks:
+    - name: Kill instances
+      wttech.aem.instance:
+        command: kill
+
+    - name: Destroy instances
+      wttech.aem.instance:
+        command: destroy

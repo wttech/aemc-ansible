@@ -12,7 +12,7 @@
     file: "{{ aem_lib_dir }}/aem-service-pkg-6.5.*.0.zip"
   become: true
   become_user: "{{ aem_system_user }}"
-  when: aem_project_kind == 'classic'
+  when: aem_instance_kind == 'classic'
 
 - name: Enable CRX DE
   wttech.aem.osgi_config:
