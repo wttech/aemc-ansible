@@ -165,4 +165,6 @@ output:
 
 base:
   # Location of temporary files (downloaded AEM packages, etc)
-  tmp_dir: "{{ aem_home_dir }}/tmp"
+  tmp_dir: "{{ aem_tmp_dir }}"
+  # Location of supportive tools (downloaded Java, OakRun, unpacked AEM SDK)
+  tool_dir: "{{ aem_tool_dir }}"
