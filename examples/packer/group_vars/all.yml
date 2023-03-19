@@ -1,4 +1,0 @@
----
-aem_instance_kind: "classic"
-aem_instance_lib_s3_bucket: "aemc"
-aem_instance_lib_s3_folder: "instance/{{ aem_instance_kind }}"
