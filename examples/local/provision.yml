@@ -1,0 +1,38 @@
+---
+- name: Provision instances
+  hosts: localhost
+  tasks:
+    - name: Enable CRX DE
+      wttech.aem.osgi_config:
+        command: save
+        pid: org.apache.sling.jcr.davex.impl.servlets.SlingDavExServlet
+        props:
+          alias: /crx/server
+
+    - name: Configure replication agent for publishing content
+      wttech.aem.repl_agent:
+        command: setup
+        instance_id: local_author
+        location: author
+        name: publish
+        props:
+          enabled: true
+          transportUri: "{{ aem_publish_http_url }}/bin/receive?sling:authRequestLogin=1"
+          transportUser: "{{ aem_instance_user }}"
+          transportPassword: "{{ aem_instance_password }}"
+          userId: "{{ aem_instance_user }}"
+
+    - name: Configure replication agent for flushing dispatcher cache
+      wttech.aem.repl_agent:
+        command: setup
+        instance_id: local_publish
+        location: publish
+        name: flush
+        props:
+          enabled: true
+          transportUri: "{{ aem_dispatcher_http_url }}/dispatcher/invalidate.cache"
+          protocolHTTPHeaders:
+            - "CQ-Action: {action}"
+            - "CQ-Handle: {path}"
+            - "CQ-Path: {path}"
+            - "Host: publish"

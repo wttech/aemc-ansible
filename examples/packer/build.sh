@@ -10,9 +10,9 @@ if [ -z ${AWS_SECRET_ACCESS_KEY+x} ]; then
 fi
 
 ACTION=${1:-test}
-AEM_PROJECT_KIND=${2:-classic}
+AEM_INSTANCE_KIND=${2:-classic}
 
-ANSIBLE_EXTRA_VARS="aem_project_kind='${AEM_PROJECT_KIND}'"
+ANSIBLE_EXTRA_VARS="aem_instance_kind='${AEM_INSTANCE_KIND}'"
 
 if [ "$ACTION" = "debug" ] ; then
   touch packer.log

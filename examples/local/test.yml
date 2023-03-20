@@ -1,30 +1,24 @@
 ---
-- name: Text extensively AEM modules
+- name: Test instances
   hosts: localhost
-  roles:
-    - wttech.aem.instance
   tasks:
-    - name: setup Crypto Support
-      wttech.aem.crypto:
-        command: setup
-
     # Package tests
 
-    - name: download CLI archive
+    - name: Download APM tool
       get_url: # replace with s3|azure blob download, etc
         url: https://github.com/wttech/APM/releases/download/apm-5.5.1/apm-all-5.5.1.zip
-        dest: /tmp/apm-all-5.5.1.zip
+        dest: "{{aem_tmp_dir }}/apm-all-5.5.1.zip"
 
     - name: Deploy APM package
       wttech.aem.pkg:
         command: deploy
-        file: /tmp/apm-all-5.5.1.zip
+        url: "{{aem_tmp_dir }}/apm-all-5.5.1.zip"
 
     - name: Read APM package
       wttech.aem.pkg:
         command: find
         instance_id: local_author
-        file: /tmp/apm-all-5.5.1.zip
+        file: "{{aem_tmp_dir }}/apm-all-5.5.1.zip"
 
     # Repository tests
 
@@ -76,3 +70,8 @@
       wttech.aem.osgi_bundle:
         command: restart
         symbolic_name: org.apache.abdera.client
+
+# TODO only if hmac/master files are provided
+#    - name: Setup Crypto Support
+#      wttech.aem.crypto:
+#        command: setup

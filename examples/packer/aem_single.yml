@@ -3,6 +3,10 @@
   hosts: [aem_single]
   strategy: mitogen_linear
   become: true
+  vars:
+    aem_instance_kind: "classic"
+    aws_aem_lib_s3_bucket: "aemc"
+    aws_aem_lib_s3_folder: "instance/{{ aem_instance_kind }}"
   roles:
-    - name: aem_instance
+    - name: wttech.aem.instance
       tags: [aem_instance]

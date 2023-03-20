@@ -3,6 +3,7 @@
 - name: Disable SELinux
   ansible.posix.selinux:
     state: disabled
+  when: ansible_os_family == 'RedHat'
 
 - name: Create system group
   group:
@@ -50,21 +51,21 @@
     mode: list
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
-    bucket: "{{ aem_lib_s3_bucket }}"
-    prefix: "{{ aem_lib_s3_folder }}/"
-    marker: "{{ aem_lib_s3_folder  }}/"
-  register: aem_lib_s3_items
+    bucket: "{{ aws_aem_lib_s3_bucket }}"
+    prefix: "{{ aws_aem_lib_s3_folder }}/"
+    marker: "{{ aws_aem_lib_s3_folder  }}/"
+  register: aws_aem_lib_s3_items
 
 - name: Download library files
   aws_s3:
     mode: get
     aws_access_key: "{{ aws_access_key }}"
     aws_secret_key: "{{ aws_secret_key }}"
-    bucket: "{{ aem_lib_s3_bucket }}"
+    bucket: "{{ aws_aem_lib_s3_bucket }}"
     object: "{{ item }}"
     dest: "{{ aem_lib_dir }}/{{ item|basename }}"
     # overwrite: never
-  with_items: "{{ aem_lib_s3_items.s3_keys }}"
+  with_items: "{{ aws_aem_lib_s3_items.s3_keys }}"
 
 - name: Install Java
   dnf:

@@ -1,3 +1,0 @@
----
-- name: Restart instance(s)
-  include_tasks: roles/aem_instance/tasks/restart.yml

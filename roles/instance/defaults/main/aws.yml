@@ -1,3 +1,7 @@
+---
 aws_region: "{{ lookup('env', 'AWS_REGION') }}"
 aws_access_key: "{{ lookup('env', 'AWS_ACCESS_KEY_ID') }}"
 aws_secret_key: "{{ lookup('env', 'AWS_SECRET_ACCESS_KEY') }}"
+
+aws_aem_lib_s3_bucket: ""
+aws_aem_lib_s3_folder: "instance/{{ aem_instance_kind }}"

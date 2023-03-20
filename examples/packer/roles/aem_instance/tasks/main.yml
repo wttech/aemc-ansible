@@ -1,7 +1,0 @@
----
-
-- name: Setup instance(s)
-  include_tasks: setup.yml
-
-- name: Provision instance(s)
-  include_tasks: provision.yml

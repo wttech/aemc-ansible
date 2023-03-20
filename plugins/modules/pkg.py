@@ -32,6 +32,7 @@ def run_module():
             command=dict(type='str', required=True),
             instance_id=dict(type='str'),
             file=dict(type='str'),
+            url=dict(type='str'),
             pid=dict(type='str'),
             path=dict(type='str'),
             force=dict(type='bool'),
@@ -45,8 +46,8 @@ def run_module():
             ('command', 'install', ['file', 'pid', 'path'], True),
             ('command', 'uninstall', ['file', 'pid', 'path'], True),
             ('command', 'delete', ['file', 'pid', 'path'], True),
-            ('command', 'upload', ['file']),
-            ('command', 'deploy', ['file']),
+            ('command', 'upload', ['file', 'url'], True),
+            ('command', 'deploy', ['file', 'url'], True),
         ]
     )
     aemc = AEMC(module)
@@ -60,6 +61,10 @@ def run_module():
     file = module.params['file']
     if file:
         args.extend(['--file', file])
+
+    url = module.params['url']
+    if url:
+        args.extend(['--url', url])
 
     pid = module.params['pid']
     if pid:
