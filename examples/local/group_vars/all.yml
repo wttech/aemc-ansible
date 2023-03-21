@@ -76,6 +76,12 @@ aem_config_dict:
     # 'serial'   - for working with local instances
     processing_mode: auto
 
+    # HTTP Client settings
+    http:
+      timeout: 5m
+      debug: false
+      disable_warn: true
+
     # State checking
     check:
       # Time to wait before first state checking (to avoid false-positives)
