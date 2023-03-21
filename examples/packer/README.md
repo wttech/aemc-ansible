@@ -14,7 +14,7 @@ Set up AEM instances on [AWS EC2](https://aws.amazon.com/ec2/) with [RHEL](https
 
 ## Example result
 
-![Packer Result](docs/packer-result.png)
+![Packer Result](docs/packer-result2.png)
 
 ## Prerequisites
 
