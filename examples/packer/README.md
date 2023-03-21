@@ -33,7 +33,7 @@ Set up AEM instances on [AWS EC2](https://aws.amazon.com/ec2/) with [RHEL](https
 
 3. Adjust AWS [S3 bucket name and dir](group_vars/all/aem.yml#L7-L8) and upload AEM library files (aem-sdk.jar, cq-quickstart.jar, license.properties, etc)
 
-   ![S3 Files Structure](docs/s3-files-overview2.png)
+   ![S3 Files Structure](docs/s3-files-overview3.png)
 
 # Building 
 
