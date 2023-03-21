@@ -10,7 +10,7 @@ Test just developed Ansible modules using lifecycle playbooks.
 ## Prerequisites
 
 - Mac or Linux
-- Ansible 20.x and higher
+- Ansible 6.x and higher
 
 # Usage 
 
