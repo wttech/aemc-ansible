@@ -18,20 +18,22 @@ Set up AEM instances on [AWS EC2](https://aws.amazon.com/ec2/) with [RHEL](https
 
 ## Prerequisites
 
-1. Build [controller](../controller/README.md) using command
+1. Install [Docker](https://docs.docker.com/get-docker/) 20.x or higher
+
+2. Build [controller](../controller/README.md) using command
 
    ```shell
    (cd ../controller && sh build.sh)
    ```
 
-2. Set up AWS environment variables
+3. Set up AWS environment variables
 
    ```shell
    export AWS_ACCESS_KEY_ID=xxx
    export AWS_SECRET_ACCESS_KEY=yyy
    ```
 
-3. Adjust AWS [S3 bucket name and dir](group_vars/all/aem.yml#L7-L8) and upload AEM library files (aem-sdk.jar, cq-quickstart.jar, license.properties, etc)
+4. Adjust AWS [S3 bucket name and dir](group_vars/all/aem.yml#L7-L8) and upload AEM library files (aem-sdk.jar, cq-quickstart.jar, license.properties, etc)
 
    ![S3 Files Structure](docs/s3-files-overview3.png)
 
