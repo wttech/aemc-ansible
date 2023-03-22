@@ -20,8 +20,9 @@ Configuration changes are applied idempotently in the Ansible spirit to reduce e
 
 1. Vars 
 
-   All configuration options available for AEM Compose CLI are also supported in Ansible.
-   It is only needed to nest config values under `aem` Ansible variable defined anywhere e.g in the playbook or custom role (according to own [preferences](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_variables.html#where-to-set-variables)).
+   All configuration options available for AEM Compose CLI are also supported in Ansible. There are two ways to define configuration.
+ 
+   The first way is **nesting config values** under `aem_config_dict` Ansible variable defined anywhere e.g in the playbook or custom role (according to own [preferences](https://docs.ansible.com/ansible/latest/playbook_guide/playbooks_variables.html#where-to-set-variables)).
    This special variable is passed to all AEM Compose modules automatically for the sake of simplicity.
 
    ```yaml
@@ -44,9 +45,11 @@ Configuration changes are applied idempotently in the Ansible spirit to reduce e
    
    # ...
    ```
+   This approach is used in [local example](examples/local/group_vars/all.yml#L25).
 
-   Consider reviewing [default vars](roles/instance/defaults/main/aem.yml) defined for [instance role](roles/instance).
-   
+   The second way is **templating configuration file** (*aem.yml*). The path of the templated file need to be defined in `aem_config_file` Ansible variable to be automatically passed to AEM Compose CLI.
+   This approach is used in [default instance role](roles/instance/templates/aem.yml)
+ 
 
 2. Playbook:
 
@@ -122,12 +125,7 @@ Configuration changes are applied idempotently in the Ansible spirit to reduce e
           alias: /crx/server
     ```
     
-    Consider reviewing playbooks used in tests for more example usages:
-    
-    - instance role 
-      - [extensive](roles/instance/tests/extensive.yml)
-      - [minimal](roles/instance/tests/minimal.yml)
-
+    Consider reviewing playbooks used in tests in [local example](examples/local) for more example usages.
 
 # Contributing
 
