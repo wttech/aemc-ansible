@@ -5,7 +5,7 @@ galaxy_info:
   role_name: instance
   author: wttech
   description: Sets up AEM instance(s) using AEM Compose tool
-  company: Wunderman Thompson Technologu
+  company: Wunderman Thompson Technology
   issue_tracker_url: http://github.com/aemc-ansible/issues
   license: Apache-2.0
   min_ansible_version: 2.14.1
