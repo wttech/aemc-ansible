@@ -26,7 +26,7 @@ Configuration changes are applied idempotently in the Ansible spirit to reduce e
    This special variable is passed to all AEM Compose modules automatically for the sake of simplicity.
 
    ```yaml
-   aem: 
+   aem_config_dict: 
      instance:
     
      config:
