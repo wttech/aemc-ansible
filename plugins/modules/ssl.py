@@ -11,7 +11,7 @@ DOCUMENTATION = r'''
 ---
 module: ssl
 
-short_description: Manages SSL by Default setup
+short_description: Manages 'SSL by Default' setup
 
 version_added: "1.2.2"
 
@@ -31,12 +31,12 @@ def run_module():
         argument_spec=AEMC_arg_spec(dict(
             command=dict(type='str', required=True),
             instance_id=dict(type='str'),
-            keystore_password=dict(type='str', no_log=True),
-            truststore_password=dict(type='str', no_log=True),
-            certificate_file=dict(type='str'),
-            private_key_file=dict(type='str'),
-            https_hostname=dict(type='str'),
-            https_port=dict(type='str'),
+            keystore_password=dict(type='str', no_log=True, required=True),
+            truststore_password=dict(type='str', no_log=True, required=True),
+            certificate_file=dict(type='str', required=True),
+            private_key_file=dict(type='str', required=True),
+            https_hostname=dict(type='str', required=True),
+            https_port=dict(type='str', required=True),
         ))
     )
     aemc = AEMC(module)
