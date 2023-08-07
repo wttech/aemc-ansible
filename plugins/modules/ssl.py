@@ -23,14 +23,12 @@ EXAMPLES = r'''
 - name: Set up 'SSL by Default'
   wttech.aem.ssl:
     command: setup
-    keystore_password: "{{ aem_ssl_keystore_password }}"
-    truststore_password: "{{ aem_ssl_truststore_password }}"
-    certificate_file: "{{ aem_ssl_certificate_file }}"
-    private_key_file: "{{ aem_ssl_private_key_file }}"
-    https_hostname: "{{ aem_ssl_https_hostname }}"
-    https_port: "{{ aem_ssl_https_port }}"
-  become: true
-  become_user: "{{ aem_system_user }}"
+    keystore_password: password1
+    truststore_password: password2
+    certificate_file: /var/certificates/certificate.crt
+    private_key_file: /var/certificates/private.key
+    https_hostname: localhost
+    https_port: 8443
 '''
 
 RETURN = r'''
