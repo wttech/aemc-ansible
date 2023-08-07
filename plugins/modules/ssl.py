@@ -13,7 +13,7 @@ module: ssl
 
 short_description: Manages 'SSL by Default' setup
 
-version_added: "1.2.2"
+version_added: "1.3.0"
 
 author:
     - Piotr Andruszkiewicz (piotr.andruszkiewicz@wundermanthompson.com)
