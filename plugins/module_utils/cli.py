@@ -44,7 +44,7 @@ class AEMC(object):
         path_env = os.environ.get(EXECUTABLE_ENV)
         path = path_env or path_var
 
-        if not os.path.isfile(path):
+        if path is None or not os.path.isfile(path):
             self.module.fail_json(msg="\n".join([
                 "> PROBLEM:\n",
                 f"Unable to find AEM CLI executable at path '{path}'!",
