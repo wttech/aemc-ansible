@@ -9,6 +9,13 @@
         props:
           alias: /crx/server
 
+    - name: Configure service user mapper
+      wttech.aem.osgi_config:
+        command: save
+        pid: org.apache.sling.serviceusermapping.impl.ServiceUserMapperImpl.amended~aemc
+        props:
+          user.mapping: [com.wttech.aemc:config-writer=aemc-service-write, com.wttech.aemc:config-reader=aemc-service-read]
+
     - name: Configure replication agent for publishing content
       wttech.aem.repl_agent:
         command: setup
