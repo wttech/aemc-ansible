@@ -1,0 +1,37 @@
+---
+- name: Test instances
+  hosts: localhost
+  tasks:
+
+    # Gts tests
+
+    - name: Get status of GTS
+      wttech.aem.gts:
+        command: status
+        instance_id: local_author
+
+    - name: Create GTS
+      wttech.aem.gts:
+        command: create
+        instance_id: local_author
+        password: test
+
+    - name: Add Cert to GTS
+      wttech.aem.gts_certificate:
+        command: add
+        instance_id: local_author
+        path: ~/projects/data/cert.cer
+      register: cert_data
+
+    - name: Read Cert from GTS
+      wttech.aem.gts_certificate:
+        command: read
+        instance_id: local_author
+        alias: "{{ cert_data.data.added }}"
+
+    - name: Remove Cert from GTS
+      wttech.aem.gts_certificate:
+        command: remove
+        instance_id: local_author
+        alias: "{{ cert_data.data.added }}"
+
