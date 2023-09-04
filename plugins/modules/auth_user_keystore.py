@@ -33,7 +33,7 @@ def run_module():
             instance_id=dict(type='str'),
             id=dict(type='str'),
             scope=dict(type='str'),
-            keystore_password=dict(type='str'),
+            keystore_password=dict(type='str', no_log=True),
         )),
         required_if=[
             ('command', 'create', ['instance_id', 'id', 'scope', 'keystore_password']),

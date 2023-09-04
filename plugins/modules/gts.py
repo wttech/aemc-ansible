@@ -31,7 +31,7 @@ def run_module():
         argument_spec=AEMC_arg_spec(dict(
             command=dict(type='str', required=True),
             instance_id=dict(type='str'),
-            password=dict(type='str'),
+            password=dict(type='str', no_log=True),
         )),
         required_if=[
             ('command', 'create', ['instance_id','password']),
