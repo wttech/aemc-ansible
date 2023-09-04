@@ -16,6 +16,6 @@
       wttech.aem.auth_user_keystore:
         command: create
         id: authentication-service
-        keystorePassword: test
+        keystore_password: test
         scope: system
         instance_id: local_author

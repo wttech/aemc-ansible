@@ -33,10 +33,10 @@ def run_module():
             instance_id=dict(type='str'),
             id=dict(type='str'),
             scope=dict(type='str'),
-            keystorePassword=dict(type='str'),
+            keystore_password=dict(type='str'),
         )),
         required_if=[
-            ('command', 'create', ['instance_id', 'id', 'scope', 'keystorePassword']),
+            ('command', 'create', ['instance_id', 'id', 'scope', 'keystore_password']),
             ('command', 'status', ['instance_id', 'id', 'scope']),
         ]
     )
@@ -59,9 +59,9 @@ def run_module():
     if scope:
         args.extend(['--scope', scope])
 
-    keystore_password = module.params['keystorePassword']
+    keystore_password = module.params['keystore_password']
     if keystore_password:
-        args.extend(['--keystorePassword', keystore_password])
+        args.extend(['--keystore-password', keystore_password])
 
     aemc.handle_json(args=args)
 
