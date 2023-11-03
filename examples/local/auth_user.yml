@@ -1,0 +1,21 @@
+---
+- name: Test instances
+  hosts: localhost
+  tasks:
+
+    # auth user tests
+
+    - name: Get status of user keystore
+      wttech.aem.auth_user_keystore:
+        command: status
+        id: authentication-service
+        scope: system
+        instance_id: local_author
+
+    - name: Create user keystore
+      wttech.aem.auth_user_keystore:
+        command: create
+        id: authentication-service
+        keystore_password: test
+        scope: system
+        instance_id: local_author
