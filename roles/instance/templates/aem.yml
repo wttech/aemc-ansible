@@ -97,10 +97,14 @@ instance:
     # OSGi components state tracking
     component_stable:
       skip: false
-      abort: true
-      pids_ignored: []
-      pids_failed_activation: ["*"]
-      pids_unsatisfied_reference: []
+      pids:
+        include: ['com.day.crx.packaging.*', 'org.apache.sling.installer.*']
+        exclude: ['org.apache.sling.installer.hc.*', 'org.apache.sling.installer.core.impl.console.*']
+        match:
+          "disabled": []
+          "no config": []
+          "unsatisfied (reference)": []
+          "satisfied": []
     # Sling Installer tracking
     installer:
       skip: false
