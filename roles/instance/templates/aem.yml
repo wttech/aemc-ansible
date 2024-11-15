@@ -52,7 +52,7 @@ instance:
 
   # HTTP client settings
   http:
-    timeout: 5m
+    timeout: 10m
     debug: false
     disable_warn: true
 
@@ -63,7 +63,7 @@ instance:
     # Time to wait for next state checking
     interval: 6s
     # Number of successful check attempts that indicates end of checking
-    done_threshold: 5
+    done_threshold: 4
     # Wait only for those instances whose state has been changed internally (unaware of external changes)
     await_strict: true
     # Max time to wait for the instance to be healthy after executing the start script or e.g deploying a package
@@ -130,18 +130,6 @@ instance:
     # Additional tools needed to manage instance
     tool_dir: "{{ aem_tool_dir }}"
 
-    # Oak Run tool options (offline instance management)
-    oak_run:
-      download_url: "https://repo1.maven.org/maven2/org/apache/jackrabbit/oak-run/1.44.0/oak-run-1.44.0.jar"
-      store_path: "crx-quickstart/repository/segmentstore"
-
-    # Source files
-    quickstart:
-      # AEM SDK ZIP or JAR
-      dist_file: "{{ aem_home_dir }}/lib/{aem-sdk,cq-quickstart}-*.{zip,jar}"
-      # AEM License properties file
-      license_file: "{{ aem_home_dir }}/lib/license.properties"
-
   # Status discovery (timezone, AEM version, etc)
   status:
     timeout: 500ms
@@ -164,7 +152,7 @@ instance:
     snapshot_deploy_skipping: true
     # Disable following workflow launchers for a package deployment time only
     toggled_workflows: [ /libs/settings/workflow/launcher/config/asset_processing_on_sdk_*,/libs/settings/workflow/launcher/config/update_asset_*,/libs/settings/workflow/launcher/config/dam_* ]
-    # Include sub-packages
+    # Also sub-packages
     install_recursive: true
     # Use slower HTML endpoint for deployments but with better troubleshooting
     install_html:
@@ -174,11 +162,15 @@ instance:
       # Fail on case 'installed with errors'
       strict: true
     # Number of changes after which the commit to the repository is performed
-    install_save_threshold: 2048
+    install_save_threshold: 1024
     # Allows to relax dependency handling if needed
     install_dependency_handling: required
     # Controls how 'rep:policy' nodes are handled during import
     install_ac_handling: ''
+
+  # 'SSL By Default'
+  ssl:
+    setup_timeout: 30s
 
   # OSGi Framework
   osgi:
@@ -190,7 +182,7 @@ instance:
         start_level: 20
         refresh_packages: true
 
-      # Force re-installing of snapshot OSGi bundles (just built / unreleased)
+      # Force re-uploading/installing of snapshot OSGi bundles (just built / unreleased)
       snapshot_patterns: [ "**/*-SNAPSHOT.jar" ]
       snapshot_ignored: false
       # Use checksums to avoid re-installations when snapshot OSGi bundles are unchanged
@@ -215,15 +207,14 @@ instance:
       lib_root: /libs/settings/workflow/launcher
       config_root: /conf/global/settings/workflow/launcher
       toggle_retry:
-        timeout: 5m
+        timeout: 10m
         delay: 10s
 
-java:
-  # Require following versions before e.g running AEM instances
-  version_constraints: ">= 11, < 12"
-
-  # Pre-installed local JDK dir (Oracle Java)
-  home_dir: "{{ aem_java_home_dir }}"
+base:
+  # Location of temporary files (downloaded AEM packages, etc)
+  tmp_dir: "{{ aem_tmp_dir }}"
+  # Location of supportive tools (downloaded Java, OakRun, unpacked AEM SDK)
+  tool_dir: "{{ aem_tool_dir }}"
 
 output:
   log:
@@ -232,8 +223,23 @@ output:
     # Controls where outputs and logs should be written to when format is 'text' (console|file|both|none)
     mode: both
 
-base:
-  # Location of temporary files (downloaded AEM packages, etc)
-  tmp_dir: "{{ aem_tmp_dir }}"
-  # Location of supportive tools (downloaded Java, OakRun, unpacked AEM SDK)
-  tool_dir: "{{ aem_tool_dir }}"
+vendor:
+  # AEM instance source files
+  quickstart:
+    # AEM SDK ZIP or JAR
+    dist_file: "{{ aem_home_dir }}/lib/{aem-sdk,cq-quickstart}-*.{zip,jar}"
+    # AEM License properties file
+    license_file: "{{ aem_home_dir }}/lib/license.properties"
+
+  # JDK used to: run AEM instances, build OSGi bundles, assemble AEM packages
+  java:
+    # Require following versions before e.g running AEM instances
+    version_constraints: ">= 11, < 12"
+
+    # Pre-installed local JDK dir (Oracle Java)
+    home_dir: "{{ aem_java_home_dir }}"
+
+  # Oak Run tool options (offline instance management)
+  oak_run:
+    download_url: "https://repo1.maven.org/maven2/org/apache/jackrabbit/oak-run/1.44.0/oak-run-1.44.0.jar"
+    store_path: "crx-quickstart/repository/segmentstore"
