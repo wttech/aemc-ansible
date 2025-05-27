@@ -9,14 +9,14 @@ from ..module_utils.cli import AEMC, AEMC_arg_spec
 
 DOCUMENTATION = r'''
 ---
-module: auth_user_keystore
+module: auth_user_key
 
-short_description: Manage AEM user keystore
+short_description: Manage AEM user private keys in the keystore
 
-version_added: "1.4.2"
+version_added: "1.6.10"
 
 author:
-    - Jan Kowalczyk (jan.kowalczyk@wundermanthompson.com)
+    - Piotr Andruszkiewicz (piotr.andruszkiewicz@vml.com)
 '''
 
 EXAMPLES = r'''
@@ -33,18 +33,22 @@ def run_module():
             instance_id=dict(type='str'),
             id=dict(type='str'),
             scope=dict(type='str'),
+            keystore_file=dict(type='path'),
             keystore_password=dict(type='str', no_log=True),
+            key_alias=dict(type='str'),
+            key_password=dict(type='str', no_log=True),
+            new_key_alias=dict(type='str', default=None),
         )),
         required_if=[
-            ('command', 'create', ['instance_id', 'id', 'scope', 'keystore_password']),
-            ('command', 'status', ['instance_id', 'id', 'scope']),
+            ('command', 'add', ['instance_id', 'id', 'key_alias', 'keystore_file', 'keystore_password']),
+            ('command', 'delete', ['instance_id', 'id', 'key_alias']),
         ]
     )
 
     aemc = AEMC(module)
     command = module.params['command']
 
-    args = ['auth', 'user', 'keystore', command]
+    args = ['auth', 'user', 'key', command]
 
     instance_id = module.params['instance_id']
     if instance_id:
@@ -59,9 +63,25 @@ def run_module():
     if scope:
         args.extend(['--scope', scope])
 
+    keystore_file = module.params['keystore_file']
+    if keystore_file:
+        args.extend(['--keystore-file', keystore_file])
+
     keystore_password = module.params['keystore_password']
     if keystore_password:
         args.extend(['--keystore-password', keystore_password])
+
+    key_alias = module.params['key_alias']
+    if key_alias:
+        args.extend(['--key-alias', key_alias])
+
+    key_password = module.params['key_password']
+    if key_password:
+        args.extend(['--key-password', key_password])
+
+    new_key_alias = module.params['new_key_alias']
+    if new_key_alias:
+        args.extend(['--new-alias', new_key_alias])
 
     aemc.handle_json(args=args)
 
