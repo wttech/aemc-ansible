@@ -13,7 +13,7 @@ module: auth_user_key
 
 short_description: Manage AEM user private keys in the keystore
 
-version_added: "1.6.10"
+version_added: "2.0.8"
 
 author:
     - Piotr Andruszkiewicz (piotr.andruszkiewicz@vml.com)
