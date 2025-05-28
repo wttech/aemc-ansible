@@ -9,14 +9,14 @@ from ..module_utils.cli import AEMC, AEMC_arg_spec
 
 DOCUMENTATION = r'''
 ---
-module: auth_user_keystore
+module: auth_user_password
 
-short_description: Manage AEM user keystore
+short_description: Manage AEM user password
 
-version_added: "1.4.2"
+version_added: "2.0.8"
 
 author:
-    - Jan Kowalczyk (jan.kowalczyk@wundermanthompson.com)
+    - Piotr Andruszkiewicz (piotr.andruszkiewicz@vml.com)
 '''
 
 EXAMPLES = r'''
@@ -33,18 +33,17 @@ def run_module():
             instance_id=dict(type='str'),
             id=dict(type='str'),
             scope=dict(type='str'),
-            keystore_password=dict(type='str', no_log=True),
+            password=dict(type='str', no_log=True),
         )),
         required_if=[
-            ('command', 'create', ['instance_id', 'id', 'scope', 'keystore_password']),
-            ('command', 'status', ['instance_id', 'id', 'scope']),
+            ('command', 'set', ['instance_id', 'id', 'password']),
         ]
     )
 
     aemc = AEMC(module)
     command = module.params['command']
 
-    args = ['auth', 'user', 'keystore', command]
+    args = ['auth', 'user', 'password', command]
 
     instance_id = module.params['instance_id']
     if instance_id:
@@ -59,11 +58,9 @@ def run_module():
     if scope:
         args.extend(['--scope', scope])
 
-    keystore_password = module.params['keystore_password']
-    if keystore_password:
-        args.extend(['--keystore-password', keystore_password])
+    password = module.params['password']
 
-    aemc.handle_json(args=args)
+    aemc.handle_json(args=args, data=password)
 
 
 def main():
