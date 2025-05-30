@@ -76,7 +76,7 @@ def run_module():
 
     force = module.params['force']
     if force is not None:
-        args.extend(['--force', force])
+        args.extend(['--force', "true" if force else "false"])
 
     aemc.handle_json(args=args)
 
