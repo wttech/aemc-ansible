@@ -21,8 +21,8 @@ aem_dirs:
 
 aem_config_file: "{{ aem_home_dir}}/etc/aem.yml"
 
-aem_java_lib_file: jdk-11.0.17_linux-x64_bin.rpm
-aem_java_home_dir: /usr/java/jdk-11.0.17
+aem_java_lib_file: jdk-11.0.25_linux-x64_bin.rpm
+aem_java_home_dir: /usr/java/jdk-11.0.25
 
 aem_system_script: /usr/bin/aem
 aem_system_service: aem
