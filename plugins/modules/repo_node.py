@@ -67,7 +67,7 @@ def run_module():
 
     replace = module.params['replace']
     if replace is not None:
-        args.extend(['--replace', replace])
+        args.extend(['--replace', 'true' if replace else 'false'])
 
     aemc.handle_json(args=args, data=yaml.dump(module.params['props']))
 

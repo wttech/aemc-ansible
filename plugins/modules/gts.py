@@ -9,9 +9,9 @@ from ..module_utils.cli import AEMC, AEMC_arg_spec
 
 DOCUMENTATION = r'''
 ---
-module: gts_certificate
+module: gts
 
-short_description: Communicate with Global Trust Store
+short_description: Manage Global Trust Store
 
 version_added: "1.3.6"
 
