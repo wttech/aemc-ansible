@@ -1,9 +1,25 @@
-![AEM Compose Logo](https://github.com/wttech/aemc-ansible/raw/main/docs/logo-with-text.png)
-[![WTT Logo](https://github.com/wttech/aemc-ansible/raw/main/docs/wtt-logo.png)](https://www.wundermanthompson.com/service/technology)
+<p align="center">
+<picture><source srcset="docs/logo-with-text-white.png" media="(prefers-color-scheme: dark)"><img src="docs/logo-with-text.png" alt="AEM Compose Logo" height="100"></picture>
+</p>
 
-[![Last Release Version](https://img.shields.io/github/v/release/wttech/aemc?color=lightblue&label=Last%20Release)](https://github.com/wttech/aemc-ansible/tags)
-[![Ansible Galaxy](https://img.shields.io/badge/Ansible%20Galaxy-8A2BE2)](https://galaxy.ansible.com/wttech/aem)
-[![Apache License, Version 2.0, January 2004](https://github.com/wttech/aemc-ansible/raw/main/docs/apache-license-badge.svg)](http://www.apache.org/licenses/)
+<p align="center">
+<strong>Provision AEM instances the Ansible way.</strong><br>
+Ansible Collection · Idempotent · Desired State
+</p>
+
+<p align="center">
+<a href="https://github.com/wttech/aemc-ansible/tags"><img src="https://img.shields.io/github/v/release/wttech/aemc?color=lightblue&label=Last%20Release" alt="Last Release Version"></a>
+<a href="https://galaxy.ansible.com/wttech/aem"><img src="https://img.shields.io/badge/Ansible%20Galaxy-8A2BE2" alt="Ansible Galaxy"></a>
+<a href="http://www.apache.org/licenses/"><img src="docs/apache-license-badge.svg" alt="Apache License, Version 2.0, January 2004"></a>
+<br>
+<sub>Proudly sponsored by:</sub>
+<br><br>
+<a href="https://enterprisesolutions.wpp.com/" target="_blank">
+<picture><source srcset="docs/wpp-es-primary-white.svg" media="(prefers-color-scheme: dark)"><img src="docs/wpp-es-primary-navy.svg" alt="WPP Enterprise Solutions" height="20"></picture>
+</a>
+</p>
+
+---
 
 # AEM Compose - Ansible Collection
 
